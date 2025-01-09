@@ -1,4 +1,4 @@
-# Sequence Diagrams<!-- omit in toc -->
+# Architecture<!-- omit in toc -->
 <!-- table of content -->
 - [Abstract](#abstract)
 - [C4 Context Diagram of Jenkins and Git Repositories](#c4-context-diagram-of-jenkins-and-git-repositories)
