@@ -3,9 +3,9 @@
 # System Design Repository
 > A comprehensive collection of system design concepts and examples using **Mermaid diagrams** and **draw.io**, featuring real-world architectures, flowcharts, and sequence diagrams.
 
+<!-- omit in toc -->
 ## 📋 Table of Contents
 - [System Design Repository](#system-design-repository)
-  - [📋 Table of Contents](#-table-of-contents)
   - [Overview](#overview)
   - [Technologies](#technologies)
     - [🧩 Mermaid](#-mermaid)
@@ -13,6 +13,7 @@
   - [Project Structure](#project-structure)
   - [Architecture Diagrams](#architecture-diagrams)
     - [🏗️ CI/CD \& DevOps](#️-cicd--devops)
+    - [🤖 AI Integration](#-ai-integration)
     - [🛒 E-Commerce Systems](#-e-commerce-systems)
   - [Flowcharts](#flowcharts)
     - [🤖 AI \& Automation](#-ai--automation)
@@ -21,6 +22,8 @@
     - [🔄 Dynamic Loading Patterns](#-dynamic-loading-patterns)
   - [Sequence Diagrams](#sequence-diagrams)
     - [📊 Data Flow Sequences](#-data-flow-sequences)
+  - [SDLC](#sdlc)
+    - [🌿 Git Flow](#-git-flow)
   - [Getting Started](#getting-started)
     - [Viewing Mermaid Diagrams](#viewing-mermaid-diagrams)
     - [Viewing draw.io Diagrams](#viewing-drawio-diagrams)
@@ -54,11 +57,14 @@ This repository serves as a practical reference for system design patterns and a
 ```
 system-design/
 ├── architecture/          # System architecture diagrams
+│   ├── ai-integration/   # AI integration and LLM proxy designs
 │   ├── jenkins/          # CI/CD pipeline architectures
 │   ├── eCommerceWebSite/ # E-commerce system designs
 │   └── syncStatusWith3rdParty/ # Third-party integration patterns
 ├── flowchart/            # Process flow diagrams
 │   └── dynamicLoading/   # Frontend component loading patterns
+├── sdlc/                 # Software development lifecycle diagrams
+│   └── git-flow-in-real-world/ # Git branch promotion and hotfix flows
 ├── sequenceDiagram/      # Interaction sequence diagrams
 └── LICENSE              # MIT License
 ```
@@ -68,6 +74,10 @@ system-design/
 ### 🏗️ CI/CD & DevOps
 - **[Jenkins CI/CD Architecture](./architecture/jenkins/)** - C4 context diagram showing Jenkins and Git repositories integration
 - **[Sync Status with 3rd Party](./architecture/syncStatusWith3rdParty/)** - Architecture for synchronizing data with external systems
+
+### 🤖 AI Integration
+- **[Built-in AI on Chrome](./architecture/ai-integration/built-in-ai-on-chrome.md)** - Multi-LLM orchestration platform design for XPrompt, including browser extension, backend, response synthesis, and Chrome built-in AI prompt enhancement flows
+- **[LLM Proxy on OpenClaw](./architecture/ai-integration/llm-proxy-on-openclaw.md)** - OpenClaw sidecar proxy design for LLM credential isolation, quota enforcement, webhook relay, and orchestrator admin APIs. (try use an AI tool, text to diagram : Napkin https://www.napkin.ai/)
 
 ### 🛒 E-Commerce Systems
 - **[E-Commerce Website System Design](./architecture/eCommerceWebSite/)** - Complete system design using C4 Model
@@ -100,6 +110,11 @@ system-design/
 - **[Remain Campaign Count Flow](./sequenceDiagram/RemainCampaignCountFlow.sequenceDiagram.md)** - API interaction sequence for campaign counting
 - **[Token States in Bet Placement](./sequenceDiagram/StatesInBetPlacementFlow.sequenceDiagram.md)** - Token state management during bet placement
 
+## SDLC
+
+### 🌿 Git Flow
+- **[Git Flow in Real World](./sdlc/git-flow-in-real-world/git-flow-graph.md)** - Mermaid git graph showing branch promotion from `dev` to `qat`, `uat`, and `prod`, plus production hotfix sync-back flow
+
 ## Getting Started
 
 ### Viewing Mermaid Diagrams
@@ -116,6 +131,7 @@ system-design/
 - 📁 [Architecture Diagrams](./architecture/)
 - 📊 [Flowcharts](./flowchart/)
 - 🔄 [Sequence Diagrams](./sequenceDiagram/)
+- 🌿 [SDLC](./sdlc/)
 
 ## Contributing
 Contributions are welcome! Please feel free to submit a Pull Request. When contributing:
@@ -128,4 +144,4 @@ Contributions are welcome! Please feel free to submit a Pull Request. When contr
 This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
 
 ---
-*Created and maintained by Max © 2023*
+*Created and maintained by Max © 2026*
