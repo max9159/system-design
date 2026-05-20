@@ -1,0 +1,21 @@
+# graphify team setup:
+# Commit graphify-out/graph.html, graphify-out/GRAPH_REPORT.md, and
+# graphify-out/graph.json so collaborators can use the generated map.
+# Keep local, machine-specific, and cache files out of git.
+graphify-out/manifest.json
+graphify-out/cost.json
+graphify-out/cache/
+graphify-out/.graphify_python
+
+# Temporary graphify extraction files.
+.graphify_*
+graphify-out/.graphify_*
+
+# Local environment and OS/editor noise.
+.env
+.env.*
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+*.temp

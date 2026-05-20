@@ -1,0 +1,45 @@
+# graphify uses .gitignore-style syntax, including ! negation.
+# Keep the corpus focused on source docs, diagrams, and architecture files.
+
+# Do not re-index graphify's generated outputs.
+graphify-out/
+
+# Version control and agent/runtime metadata.
+.git/
+.github/
+.agents/
+.codex/
+.claude/
+
+# Dependency and package-manager directories.
+node_modules/
+vendor/
+.venv/
+venv/
+env/
+__pycache__/
+.pytest_cache/
+
+# Build outputs and generated bundles.
+dist/
+build/
+out/
+coverage/
+*.min.js
+*.bundle.js
+*.map
+
+# Local/editor/system noise.
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+*.temp
+
+# Secrets and local machine configuration.
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
