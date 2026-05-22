@@ -76,7 +76,7 @@ system-design/
 
 ### Popular Product System Designs
 - **[Design Uber](./architecture/uber/)** - Ride request, trip lifecycle, and live location update diagrams with source-backed fulfillment and push-delivery boundaries
-- **[Design Netflix](./architecture/netflix/)** - Content preparation, playback startup, and recommendation diagrams for a streaming platform design
+- **[Netflix Video Processing Pipeline Rebuild](./architecture/netflix/)** - Cosmos pipeline decomposition, media service boundaries, and VES workflow diagrams
 
 ### 🏗️ CI/CD & DevOps
 - **[Jenkins CI/CD Architecture](./architecture/jenkins/)** - C4 context diagram showing Jenkins and Git repositories integration

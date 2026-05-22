@@ -1,115 +1,128 @@
-# Design Netflix
+# Netflix Video Processing Pipeline Rebuild
 
-Netflix is a strong streaming system design topic because most of the expensive work happens before a viewer presses play. This pack separates delivery-ready asset preparation, low-latency playback startup, and recommendation work so a reader can see which data plane each path needs.
+This Netflix case study is most useful as a video-platform architecture lesson. The official pipeline articles explain why a long-lived media pipeline outgrows a bundled platform when new codecs, studio workflows, quality analysis, and service-specific reliability needs all evolve at different speeds.
 
-## Product Scope
+## Case-Study Focus
 
-- Content ingest, processing, encoding, packaging, delivery-ready storage, and CDN preparation.
-- Member playback startup, title metadata, playback decisions, manifests, adaptive bitrate media segments, and watch events.
-- Personalized recommendation surfaces backed by offline interaction learning and latency-sensitive online consumers.
-- Catalog availability, device capability, rights, and playback policy as dependencies at the control-plane boundary.
+- The rebuild from the older Reloaded video pipeline to Cosmos, a workflow-driven platform for media-centric microservices.
+- Service boundaries in the video path: inspection, complexity analysis, ladder generation, encoding, quality measurement, and validation.
+- The Video Encoding Service (VES) internals that hide chunking, chunk-level work, assembly, and callback aggregation behind a clear service boundary.
+- Transferable design lessons for asynchronous media processing systems that need quality, resiliency, and independent service evolution.
 
 ## Read This First
 
-Start with the content preparation diagram. Playback performance depends on assets that were encoded, packaged, stored, and positioned before a member requests a title.
+Start with the service-boundary split. Netflix's architecture value here is not "upload file then put it on a CDN"; it is how a formerly bundled media pipeline was decomposed around processing responsibilities.
 
 ## Source Map
 
-The first-pass diagrams are distilled from the official sources collected in [Design Netflix](../../survey/design-netflix-index.md) and the recommendation note in [Foundation Model for Personalized Recommendation](../../survey/netflix-recommendation-foundation-model.md).
+The diagrams below distill official sources collected by [Design Netflix](../../survey/design-netflix-index.md).
 
 | Source | Used for |
 | --- | --- |
-| [Rebuilding Netflix Video Processing Pipeline with Microservices](https://netflixtechblog.com/rebuilding-netflix-video-processing-pipeline-with-microservices-4e5e6310e359) | Video processing decomposition and pre-play workflow boundaries. |
-| [The Making of VES](https://netflixtechblog.com/the-making-of-ves-the-cosmos-microservice-for-netflix-video-encoding-946b9b3cd300) | Encoding service responsibilities inside the processing pipeline. |
-| [Foundation Model for Personalized Recommendation](https://netflixtechblog.com/foundation-model-for-personalized-recommendation-1a0bd8e02d39) | Shared preference representations, interaction data, and downstream recommendation consumers. |
-| [Open Connect: a decade of streaming](https://about.netflix.com/en/news/open-connect-celebrating-a-decade-of-smooth-and-efficient-streaming) | Delivery context and content placement close to members. |
+| [Rebuilding Netflix Video Processing Pipeline with Microservices](https://netflixtechblog.com/rebuilding-netflix-video-processing-pipeline-with-microservices-4e5e6310e359) | Reloaded-to-Cosmos motivation, service boundaries, pipeline services, and workflow-driven media microservices. |
+| [The Making of VES](https://netflixtechblog.com/the-making-of-ves-the-cosmos-microservice-for-netflix-video-encoding-946b9b3cd300) | Cosmos layers and the VES encoding workflow around chunking, stratum functions, assembly, and callbacks. |
 
 ## Evidence Boundary
 
 **Verified by the source set**
 
-- Netflix video delivery depends on a pre-play processing and encoding pipeline.
-- Recommendation work can separate interaction learning and representation publication from online consumers.
-- Open Connect provides the delivery context for serving prepared content near members.
+- Netflix rebuilt the pipeline on Cosmos after years of expanding streaming and studio-processing needs made the older Reloaded platform increasingly complex.
+- Cosmos microservices use separate API, workflow, and serverless compute layers named Optimus, Plato, and Stratum.
+- Netflix split the video pipeline into services with clearer boundaries, including VIS, CAS, LGS, VES, VQS, and VVS.
+- VES abstracts distributed chunk-based encoding details so clients request an encoded output rather than orchestrating chunk work themselves.
 
 **Assumptions in these diagrams**
 
-- Service names such as `Playback Control Plane`, `Manifest Service`, and `Recommendation API` are explanatory boundaries.
-- The public source set does not describe one current end-to-end playback control plane, so the playback diagram is a reference design grounded in the proven media and delivery boundaries.
-- Rights checks, device capability negotiation, experimentation, and DRM are grouped at the startup decision boundary instead of expanded into Netflix-specific internals.
+- The diagrams are educational reconstructions from the public articles, not copies of Netflix's internal pipeline diagrams.
+- A linear pipeline view is used to show service responsibilities; production workflows can branch, compose services differently, and serve streaming or studio use cases with different requirements.
+- Storage, scheduling metadata, retries, observability, and delivery-system integration are abstracted unless the official article makes them central to the service boundary.
 
-## 1. Content Preparation Pipeline
+## 1. Why The Old Pipeline Needed New Boundaries
 
-Viewer playback should reuse delivery-ready outputs. Encoding and packaging work belongs before the request path that a member experiences.
+Reloaded kept several responsibilities bundled inside a larger platform. Netflix's rebuild starts by identifying boundaries where different analyses and transformations deserve independent service ownership and evolution.
 
 ```mermaid
 flowchart LR
-    Studio["Content Ingest"] --> Intake["Asset Intake + Validation"]
-    Intake --> Workflow["Video Processing Workflow"]
-    Workflow --> Encode["Encoding Service"]
-    Encode --> Package["Package Video, Audio, Subtitles, Manifests"]
-    Package --> Assets[("Delivery-Ready Asset Store")]
-    Package --> Catalog["Catalog + Asset Metadata"]
-    Assets --> Placement["CDN Preparation / Placement"]
-    Placement --> OpenConnect["Open Connect Delivery"]
+    Asset["Mezzanine media asset"] --> Reloaded
+
+    subgraph Previous["Reloaded video pipeline"]
+        Reloaded["Bundled pipeline modules"]
+        InspectOld["Inspection"]
+        AnalyzeOld["Complexity analysis"]
+        EncodeOld["Chunk encoding + assembly"]
+        QualityOld["Quality scoring"]
+        ValidateOld["Validation"]
+        Reloaded --> InspectOld --> AnalyzeOld --> EncodeOld --> QualityOld --> ValidateOld
+    end
+
+    ValidateOld --> Pressure["More codecs, studio workflows,<br/>quality innovation, reliability needs"]
+
+    Pressure --> Split["Define service boundaries<br/>around media responsibilities"]
 ```
 
-## 2. Playback Startup And Segment Delivery
+## 2. Cosmos Video Service Topology
 
-The control plane starts a viewing session and returns the right manifest. The data plane serves adaptive bitrate segments from prepared delivery assets.
+The technical core of the rebuild is a workflow-driven composition of media services. Each service should own one processing responsibility while Cosmos provides the platform shape for API entry, workflow orchestration, and compute execution.
+
+```mermaid
+flowchart LR
+    Client["Streaming or Studio Workflow"] --> Cosmos["Cosmos Workflow"]
+    Asset["Mezzanine Asset"] --> VIS["VIS<br/>Video Inspection"]
+    Cosmos --> VIS
+    VIS --> CAS["CAS<br/>Complexity Analysis"]
+    CAS --> LGS["LGS<br/>Ladder Generation"]
+    LGS --> VES["VES<br/>Video Encoding"]
+    VES --> VQS["VQS<br/>Video Quality"]
+    VQS --> VVS["VVS<br/>Video Validation"]
+    VVS --> Output["Validated encoded outputs"]
+
+    subgraph Layers["Cosmos service layers"]
+        Optimus["Optimus<br/>API layer"]
+        Plato["Plato<br/>workflow layer"]
+        Stratum["Stratum<br/>serverless compute"]
+        Optimus --> Plato --> Stratum
+    end
+
+    Cosmos -. "service invocation contract" .-> Optimus
+```
+
+## 3. VES Hides Distributed Encoding Complexity
+
+VES is the sharper service-design example. The caller asks for video encoding; the service workflow owns chunk division, parallel chunk encoding, assembly, and output callback behavior. VQS can remain a separate quality service rather than staying bundled inside the encoding module.
 
 ```mermaid
 sequenceDiagram
-    participant Member as Member Device
-    participant Playback as Playback Control Plane
-    participant Catalog as Catalog Metadata
-    participant Policy as Rights / Device / Policy
-    participant Manifest as Manifest Service
-    participant CDN as Open Connect / CDN
-    participant Events as Watch Event Ingest
+    participant Caller as Pipeline Caller
+    participant API as Optimus API
+    participant Flow as Plato Workflow
+    participant Chunk as Chunking Step
+    participant Encode as Stratum Encoders
+    participant Assemble as Assembly Step
+    participant Callback as Callback / Next Service
 
-    Member->>Playback: Play title for profile and device
-    Playback->>Catalog: Resolve title and asset metadata
-    Playback->>Policy: Check availability and playback constraints
-    Playback->>Manifest: Select delivery manifest
-    Manifest-->>Playback: Manifest URL and session metadata
-    Playback-->>Member: Playback session response
-    Member->>CDN: Fetch manifest
-    loop Adaptive bitrate playback
-        Member->>CDN: Fetch media segment
-        CDN-->>Member: Video or audio segment
+    Caller->>API: Request encoded video
+    API->>Flow: Start VES workflow
+    Flow->>Chunk: Divide source into chunks
+    par Encode chunk work
+        Chunk->>Encode: Encode chunk 1
+        Chunk->>Encode: Encode chunk N
     end
-    Member->>Events: Playback progress and quality events
+    Encode-->>Flow: Chunk outputs
+    Flow->>Assemble: Assemble encoded video
+    Assemble-->>Flow: Encoded output
+    Flow->>Callback: Publish completion
+    Callback-->>Caller: Encoded asset is ready
 ```
 
-## 3. Recommendation Representations And Online Consumers
+## Technical Takeaways
 
-Recommendation systems should show offline preparation and online serving separately. Shared member and title representations can support multiple recommendation surfaces.
+- In processing pipelines, a useful microservice boundary hides an internal execution strategy while exposing a stable media responsibility.
+- Chunked parallelism is an implementation detail worth centralizing in the encoding service, not a concern every upstream workflow should reimplement.
+- Quality measurement and validation should not be swallowed by encoding when their evaluation logic, scale, and innovation cycle differ.
+- A workflow-driven platform is a better abstraction than a synchronous request chain for long-running media work with different latency and resiliency needs.
+- Rebuild diagrams should show what changed in service ownership and orchestration, not only the final boxes in delivery order.
 
-```mermaid
-flowchart LR
-    Watch["Watch + Interaction Events"] --> Dataset["Interaction Dataset"]
-    TitleMeta["Title Metadata"] --> Dataset
-    Dataset --> Tokens["Sequence / Feature Preparation"]
-    Tokens --> Train["Offline Preference Model Training"]
-    Train --> Repr["Member + Title Representations"]
-    Repr --> Publish["Representation Publication"]
-    Publish --> Online["Online Recommendation Serving"]
-    Context["Request Context"] --> Online
-    Catalog["Eligible Catalog Candidates"] --> Online
-    Online --> Home["Home Recommendations"]
-    Online --> Continue["Continue Watching"]
-    Online --> Similar["Title Detail Rows"]
-```
+## Follow-Up Depth
 
-## Best-Practice Takeaways
-
-- Move heavy encoding, packaging, and delivery preparation out of the member playback path.
-- Keep catalog metadata, recommendation representations, watch events, and media segments in separate data planes.
-- Draw online recommendation latency separately from offline training and publication workflows.
-- Keep playback startup decisions explicit so device, rights, policy, and delivery concerns do not disappear behind a CDN box.
-
-## Coverage Gaps
-
-- The selected public sources do not prove a current Netflix playback control-plane shape end to end.
-- Experimentation, DRM, ad-supported playback, and detailed watch-history consistency are useful follow-up topics only after adding official sources for those slices.
+- Recommendation foundation models deserve a separate Netflix recommendation pack; they solve interaction-data, embedding, cold-start, and downstream-consumer problems rather than media processing.
+- Playback startup and Open Connect delivery should also be separate packs unless official control-plane sources are added for the specific playback slice.

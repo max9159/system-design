@@ -15,7 +15,7 @@
 > These Mermaid-first design packs turn high-signal survey sources into quick architecture reads with explicit evidence boundaries and best-practice takeaways.
 
 - [Design Uber](./uber/) - ride request, trip lifecycle, and live location update paths for a ride-hailing marketplace
-- [Design Netflix](./netflix/) - content preparation, playback startup, and recommendation paths for a streaming platform
+- [Netflix Video Processing Pipeline Rebuild](./netflix/) - Cosmos pipeline decomposition, media service boundaries, and VES workflow internals
 
 ## C4 Context Diagram of Jenkins and Git Repositories
 > The `mermaid` diagrams illustrate the `C4 context diagram` of `Jenkins` and `Git repositories`, showcasing the interactions and relationships between various components. 
