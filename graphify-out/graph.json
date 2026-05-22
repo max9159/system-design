@@ -4,151 +4,50 @@
   "graph": {
     "hyperedges": [
       {
-        "id": "xprompt_multi_llm_orchestration",
-        "label": "XPrompt Multi-LLM Orchestration Flow",
+        "id": "netflix_cosmos_video_pipeline_services",
+        "label": "Netflix Cosmos Video Processing Pipeline (VIS \u00e2\u2020\u2019 CAS \u00e2\u2020\u2019 LGS \u00e2\u2020\u2019 VES \u00e2\u2020\u2019 VQS \u00e2\u2020\u2019 VVS)",
         "nodes": [
-          "built_in_ai_on_chrome_portal",
-          "built_in_ai_on_chrome_background_service_worker",
-          "built_in_ai_on_chrome_executor",
-          "built_in_ai_on_chrome_llm_providers",
-          "built_in_ai_on_chrome_api"
+          "netflix_vis_service",
+          "netflix_cas_service",
+          "netflix_lgs_service",
+          "netflix_ves_service",
+          "netflix_vqs_service",
+          "netflix_vvs_service",
+          "netflix_cosmos_platform"
         ],
         "relation": "participate_in",
         "confidence": "EXTRACTED",
         "confidence_score": 1.0,
-        "source_file": "architecture/ai-integration/built-in-ai-on-chrome.md"
+        "source_file": "architecture/netflix/index.md"
       },
       {
-        "id": "notification_status_sync_flow",
-        "label": "Notification Status Sync Flow",
+        "id": "uber_new_fulfillment_platform_components",
+        "label": "Uber New Fulfillment Platform: BTC + Statecharts + ORM + Spanner + LATE",
         "nodes": [
-          "sync_status_notify_integration_api",
-          "sync_status_kafka",
-          "sync_status_notify_consume_service",
-          "sync_status_third_party_api",
-          "sync_status_portal_notification"
+          "uber_btc_coordinator",
+          "uber_entity_statecharts",
+          "uber_orm_layer",
+          "uber_spanner_storage",
+          "uber_late_action_table"
         ],
-        "relation": "participate_in",
+        "relation": "implement",
         "confidence": "EXTRACTED",
         "confidence_score": 1.0,
-        "source_file": "architecture/syncStatusWith3rdParty/index.md"
+        "source_file": "architecture/uber/index.md"
       },
       {
-        "id": "dynamic_component_loading_pattern",
-        "label": "Dynamic Component Loading Pattern",
+        "id": "multi_entity_transactional_lifecycle_systems",
+        "label": "Multi-Entity Transactional Lifecycle Pattern (Uber Trip+Supply, Stripe Ledger, FOQS Queue)",
         "nodes": [
-          "dynamic_loading_results_component",
-          "dynamic_loading_layout_config",
-          "dynamic_loading_result_ball_loader",
-          "dynamic_loading_result_summary_loader",
-          "dynamic_loading_counter_dynamic_market_selections"
-        ],
-        "relation": "form",
-        "confidence": "EXTRACTED",
-        "confidence_score": 1.0,
-        "source_file": "flowchart/dynamicLoading/DynamicLoadindgMechanism.flowchart.md"
-      },
-      {
-        "id": "llm_proxy_cmp_gateway_proxy_upstream_flow",
-        "label": "Gateway Proxy Upstream Flow",
-        "nodes": [
-          "llm_proxy_cmp_diagram_openclaw_gateway",
-          "llm_proxy_cmp_diagram_iclaw_openclaw_proxy",
-          "llm_proxy_cmp_diagram_llm_upstream"
-        ],
-        "relation": "participate_in",
-        "confidence": "EXTRACTED",
-        "confidence_score": 1.0,
-        "source_file": "architecture/ai-integration/llm-proxy-cmp-diagram.svg"
-      },
-      {
-        "id": "llm_proxy_cmp_proxy_auth_header_rewrite",
-        "label": "Proxy Auth Header Rewrite",
-        "nodes": [
-          "llm_proxy_cmp_diagram_strip_incoming_auth_headers",
-          "llm_proxy_cmp_diagram_inject_real_llm_api_key_from_memory",
-          "llm_proxy_cmp_diagram_real_llm_api_key"
-        ],
-        "relation": "form",
-        "confidence": "EXTRACTED",
-        "confidence_score": 1.0,
-        "source_file": "architecture/ai-integration/llm-proxy-cmp-diagram.svg"
-      },
-      {
-        "id": "gogoshop_frontend_clients",
-        "label": "GoGoShop Frontend Clients",
-        "nodes": [
-          "System_Design_v1-Container_user",
-          "System_Design_v1-Container_merchant",
-          "System_Design_v1-Container_shopping_portal",
-          "System_Design_v1-Container_back_office"
-        ],
-        "relation": "participate_in",
-        "confidence": "EXTRACTED",
-        "confidence_score": 1.0,
-        "source_file": "architecture/eCommerceWebSite/System_Design_v1-Container.drawio.png"
-      },
-      {
-        "id": "gogoshop_rest_service_layer",
-        "label": "GoGoShop REST Service Layer",
-        "nodes": [
-          "System_Design_v1-Container_shopping_portal",
-          "System_Design_v1-Container_back_office",
-          "System_Design_v1-Container_user_service",
-          "System_Design_v1-Container_product_service",
-          "System_Design_v1-Container_rest_api"
-        ],
-        "relation": "form",
-        "confidence": "EXTRACTED",
-        "confidence_score": 1.0,
-        "source_file": "architecture/eCommerceWebSite/System_Design_v1-Container.drawio.png"
-      },
-      {
-        "id": "gogoshop_messaging_flow",
-        "label": "GoGoShop Messaging Flow",
-        "nodes": [
-          "System_Design_v1-Container_firebase_cloud_messaging",
-          "System_Design_v1-Container_real_time_message",
-          "System_Design_v1-Container_back_office",
-          "System_Design_v1-Container_product_service",
-          "System_Design_v1-Container_message_queue",
-          "System_Design_v1-Container_pub_sub_message"
-        ],
-        "relation": "participate_in",
-        "confidence": "INFERRED",
-        "confidence_score": 0.8,
-        "source_file": "architecture/eCommerceWebSite/System_Design_v1-Container.drawio.png"
-      },
-      {
-        "id": "gogoshop_customer_purchase_context",
-        "label": "GoGoShop Customer Purchase Context",
-        "nodes": [
-          "system_design_v1_context_user",
-          "system_design_v1_context_shopping_portal",
-          "system_design_v1_context_product",
-          "system_design_v1_context_merchant",
-          "system_design_v1_context_customer_account"
-        ],
-        "relation": "form",
-        "confidence": "EXTRACTED",
-        "confidence_score": 1.0,
-        "source_file": "architecture/eCommerceWebSite/System_Design_v1-Context.drawio.png"
-      },
-      {
-        "id": "gogoshop_merchant_management_context",
-        "label": "GoGoShop Merchant Management Context",
-        "nodes": [
-          "system_design_v1_context_merchant",
-          "system_design_v1_context_back_office",
-          "system_design_v1_context_store",
-          "system_design_v1_context_user",
-          "system_design_v1_context_promotion",
-          "system_design_v1_context_business_report"
+          "uber_entity_statecharts",
+          "survey_stripe_ledger_state_machine",
+          "survey_meta_foqs_priority_queue",
+          "uber_late_action_table"
         ],
         "relation": "form",
         "confidence": "INFERRED",
         "confidence_score": 0.75,
-        "source_file": "architecture/eCommerceWebSite/System_Design_v1-Context.drawio.png"
+        "source_file": "architecture/uber/index.md"
       }
     ]
   },
@@ -162,9 +61,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "readme_system_design_repository",
-      "community": 10,
-      "norm_label": "system design repository"
+      "community": 12,
+      "norm_label": "system design repository",
+      "id": "readme_system_design_repository"
     },
     {
       "label": "Mermaid",
@@ -175,9 +74,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "readme_mermaid",
-      "community": 10,
-      "norm_label": "mermaid"
+      "community": 12,
+      "norm_label": "mermaid",
+      "id": "readme_mermaid"
     },
     {
       "label": "draw.io",
@@ -188,9 +87,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "readme_drawio",
-      "community": 10,
-      "norm_label": "draw.io"
+      "community": 12,
+      "norm_label": "draw.io",
+      "id": "readme_drawio"
     },
     {
       "label": "Architecture Diagrams",
@@ -201,9 +100,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "readme_architecture_diagrams",
-      "community": 7,
-      "norm_label": "architecture diagrams"
+      "community": 2,
+      "norm_label": "architecture diagrams",
+      "id": "readme_architecture_diagrams"
     },
     {
       "label": "Flowcharts",
@@ -214,9 +113,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "readme_flowcharts",
-      "community": 13,
-      "norm_label": "flowcharts"
+      "community": 17,
+      "norm_label": "flowcharts",
+      "id": "readme_flowcharts"
     },
     {
       "label": "Sequence Diagrams",
@@ -227,9 +126,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "readme_sequence_diagrams",
-      "community": 14,
-      "norm_label": "sequence diagrams"
+      "community": 18,
+      "norm_label": "sequence diagrams",
+      "id": "readme_sequence_diagrams"
     },
     {
       "label": "Jenkins and Git Repositories C4 Context",
@@ -240,9 +139,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "architecture_readme_jenkins_git_context",
-      "community": 7,
-      "norm_label": "jenkins and git repositories c4 context"
+      "community": 2,
+      "norm_label": "jenkins and git repositories c4 context",
+      "id": "architecture_readme_jenkins_git_context"
     },
     {
       "label": "UAT.Generatepackage",
@@ -253,9 +152,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "jenkins_cicd_architecture_uat_generatepackage",
-      "community": 9,
-      "norm_label": "uat.generatepackage"
+      "community": 11,
+      "norm_label": "uat.generatepackage",
+      "id": "jenkins_cicd_architecture_uat_generatepackage"
     },
     {
       "label": "PROD.Generatepackage",
@@ -266,9 +165,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "jenkins_cicd_architecture_prod_generatepackage",
-      "community": 9,
-      "norm_label": "prod.generatepackage"
+      "community": 11,
+      "norm_label": "prod.generatepackage",
+      "id": "jenkins_cicd_architecture_prod_generatepackage"
     },
     {
       "label": "Git Repo Source Database Package Sources",
@@ -279,9 +178,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "jenkins_cicd_architecture_git_source_database",
-      "community": 9,
-      "norm_label": "git repo source database package sources"
+      "community": 11,
+      "norm_label": "git repo source database package sources",
+      "id": "jenkins_cicd_architecture_git_source_database"
     },
     {
       "label": "UAT Internal Artifacts Branch",
@@ -292,9 +191,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "jenkins_cicd_architecture_uat_artifacts",
-      "community": 9,
-      "norm_label": "uat internal artifacts branch"
+      "community": 11,
+      "norm_label": "uat internal artifacts branch",
+      "id": "jenkins_cicd_architecture_uat_artifacts"
     },
     {
       "label": "PROD Internal Artifacts Branch",
@@ -305,9 +204,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "jenkins_cicd_architecture_prod_artifacts",
-      "community": 9,
-      "norm_label": "prod internal artifacts branch"
+      "community": 11,
+      "norm_label": "prod internal artifacts branch",
+      "id": "jenkins_cicd_architecture_prod_artifacts"
     },
     {
       "label": "XPrompt",
@@ -318,9 +217,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "built_in_ai_on_chrome_xprompt",
-      "community": 6,
-      "norm_label": "xprompt"
+      "community": 2,
+      "norm_label": "xprompt",
+      "id": "built_in_ai_on_chrome_xprompt"
     },
     {
       "label": "XPrompt Portal",
@@ -331,9 +230,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "built_in_ai_on_chrome_portal",
-      "community": 6,
-      "norm_label": "xprompt portal"
+      "community": 2,
+      "norm_label": "xprompt portal",
+      "id": "built_in_ai_on_chrome_portal"
     },
     {
       "label": "XPrompt Extension",
@@ -344,9 +243,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "built_in_ai_on_chrome_extension",
-      "community": 6,
-      "norm_label": "xprompt extension"
+      "community": 2,
+      "norm_label": "xprompt extension",
+      "id": "built_in_ai_on_chrome_extension"
     },
     {
       "label": "XPrompt API",
@@ -357,9 +256,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "built_in_ai_on_chrome_api",
-      "community": 6,
-      "norm_label": "xprompt api"
+      "community": 2,
+      "norm_label": "xprompt api",
+      "id": "built_in_ai_on_chrome_api"
     },
     {
       "label": "LLM Providers",
@@ -370,9 +269,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "built_in_ai_on_chrome_llm_providers",
-      "community": 6,
-      "norm_label": "llm providers"
+      "community": 2,
+      "norm_label": "llm providers",
+      "id": "built_in_ai_on_chrome_llm_providers"
     },
     {
       "label": "Chrome Built-in AI",
@@ -383,9 +282,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "built_in_ai_on_chrome_chrome_ai",
-      "community": 1,
-      "norm_label": "chrome built-in ai"
+      "community": 5,
+      "norm_label": "chrome built-in ai",
+      "id": "built_in_ai_on_chrome_chrome_ai"
     },
     {
       "label": "Background Service Worker",
@@ -396,9 +295,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "built_in_ai_on_chrome_background_service_worker",
-      "community": 1,
-      "norm_label": "background service worker"
+      "community": 5,
+      "norm_label": "background service worker",
+      "id": "built_in_ai_on_chrome_background_service_worker"
     },
     {
       "label": "Executor Content Script",
@@ -409,9 +308,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "built_in_ai_on_chrome_executor",
-      "community": 1,
-      "norm_label": "executor content script"
+      "community": 5,
+      "norm_label": "executor content script",
+      "id": "built_in_ai_on_chrome_executor"
     },
     {
       "label": "Offscreen Document Chrome AI Bridge",
@@ -422,9 +321,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "built_in_ai_on_chrome_offscreen_document",
-      "community": 1,
-      "norm_label": "offscreen document chrome ai bridge"
+      "community": 5,
+      "norm_label": "offscreen document chrome ai bridge",
+      "id": "built_in_ai_on_chrome_offscreen_document"
     },
     {
       "label": "iclaw-openclaw-proxy Sidecar",
@@ -435,9 +334,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "llm_proxy_on_openclaw_sidecar",
-      "community": 7,
-      "norm_label": "iclaw-openclaw-proxy sidecar"
+      "community": 2,
+      "norm_label": "iclaw-openclaw-proxy sidecar",
+      "id": "llm_proxy_on_openclaw_sidecar"
     },
     {
       "label": "OpenClaw Gateway",
@@ -448,9 +347,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "llm_proxy_on_openclaw_openclaw_gateway",
-      "community": 7,
-      "norm_label": "openclaw gateway"
+      "community": 2,
+      "norm_label": "openclaw gateway",
+      "id": "llm_proxy_on_openclaw_openclaw_gateway"
     },
     {
       "label": "LLM Reverse Proxy",
@@ -461,9 +360,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "llm_proxy_on_openclaw_llm_reverse_proxy",
-      "community": 7,
-      "norm_label": "llm reverse proxy"
+      "community": 2,
+      "norm_label": "llm reverse proxy",
+      "id": "llm_proxy_on_openclaw_llm_reverse_proxy"
     },
     {
       "label": "Webhook Relay",
@@ -474,9 +373,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "llm_proxy_on_openclaw_webhook_relay",
-      "community": 7,
-      "norm_label": "webhook relay"
+      "community": 2,
+      "norm_label": "webhook relay",
+      "id": "llm_proxy_on_openclaw_webhook_relay"
     },
     {
       "label": "Admin API",
@@ -487,9 +386,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "llm_proxy_on_openclaw_admin_api",
-      "community": 7,
-      "norm_label": "admin api"
+      "community": 2,
+      "norm_label": "admin api",
+      "id": "llm_proxy_on_openclaw_admin_api"
     },
     {
       "label": "LLM Credential Boundary Rationale",
@@ -500,9 +399,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "llm_proxy_on_openclaw_credential_boundary_rationale",
-      "community": 7,
-      "norm_label": "llm credential boundary rationale"
+      "community": 2,
+      "norm_label": "llm credential boundary rationale",
+      "id": "llm_proxy_on_openclaw_credential_boundary_rationale"
     },
     {
       "label": "Microservices Architecture",
@@ -513,9 +412,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "ecommerce_index_microservices_architecture",
-      "community": 3,
-      "norm_label": "microservices architecture"
+      "community": 7,
+      "norm_label": "microservices architecture",
+      "id": "ecommerce_index_microservices_architecture"
     },
     {
       "label": "Monolithic Architecture Limitations",
@@ -526,9 +425,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "ecommerce_index_monolithic_limitations",
-      "community": 3,
-      "norm_label": "monolithic architecture limitations"
+      "community": 7,
+      "norm_label": "monolithic architecture limitations",
+      "id": "ecommerce_index_monolithic_limitations"
     },
     {
       "label": "Single Page Application Frontend",
@@ -539,9 +438,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "ecommerce_index_spa_frontend",
-      "community": 3,
-      "norm_label": "single page application frontend"
+      "community": 7,
+      "norm_label": "single page application frontend",
+      "id": "ecommerce_index_spa_frontend"
     },
     {
       "label": "ProductService",
@@ -552,9 +451,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "ecommerce_index_product_service",
-      "community": 3,
-      "norm_label": "productservice"
+      "community": 7,
+      "norm_label": "productservice",
+      "id": "ecommerce_index_product_service"
     },
     {
       "label": "UserService",
@@ -565,9 +464,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "ecommerce_index_user_service",
-      "community": 3,
-      "norm_label": "userservice"
+      "community": 7,
+      "norm_label": "userservice",
+      "id": "ecommerce_index_user_service"
     },
     {
       "label": "JWT Authentication",
@@ -578,9 +477,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "ecommerce_index_jwt_authentication",
-      "community": 3,
-      "norm_label": "jwt authentication"
+      "community": 7,
+      "norm_label": "jwt authentication",
+      "id": "ecommerce_index_jwt_authentication"
     },
     {
       "label": "WebSockets Real-Time Updates",
@@ -591,9 +490,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "ecommerce_index_websockets",
-      "community": 3,
-      "norm_label": "websockets real-time updates"
+      "community": 7,
+      "norm_label": "websockets real-time updates",
+      "id": "ecommerce_index_websockets"
     },
     {
       "label": "Third-Party Communication Services",
@@ -604,9 +503,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "ecommerce_index_third_party_services",
-      "community": 3,
-      "norm_label": "third-party communication services"
+      "community": 7,
+      "norm_label": "third-party communication services",
+      "id": "ecommerce_index_third_party_services"
     },
     {
       "label": "eCommerce C4 Model draw.io Sources",
@@ -617,9 +516,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "ecommerce_c4model_drawio_sources",
-      "community": 10,
-      "norm_label": "ecommerce c4 model draw.io sources"
+      "community": 12,
+      "norm_label": "ecommerce c4 model draw.io sources",
+      "id": "ecommerce_c4model_drawio_sources"
     },
     {
       "label": "eCommerce System Design v1 HTML Export",
@@ -630,9 +529,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "ecommerce_system_design_v1_html_export",
-      "community": 3,
-      "norm_label": "ecommerce system design v1 html export"
+      "community": 7,
+      "norm_label": "ecommerce system design v1 html export",
+      "id": "ecommerce_system_design_v1_html_export"
     },
     {
       "label": "eCommerce System Design v1 PDF Export",
@@ -643,9 +542,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "ecommerce_system_design_v1_pdf_export",
-      "community": 3,
-      "norm_label": "ecommerce system design v1 pdf export"
+      "community": 7,
+      "norm_label": "ecommerce system design v1 pdf export",
+      "id": "ecommerce_system_design_v1_pdf_export"
     },
     {
       "label": "Notification Status Flow",
@@ -656,9 +555,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "sync_status_notification_status_flow",
-      "community": 2,
-      "norm_label": "notification status flow"
+      "community": 6,
+      "norm_label": "notification status flow",
+      "id": "sync_status_notification_status_flow"
     },
     {
       "label": "PortalNotification",
@@ -669,9 +568,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "sync_status_portal_notification",
-      "community": 2,
-      "norm_label": "portalnotification"
+      "community": 6,
+      "norm_label": "portalnotification",
+      "id": "sync_status_portal_notification"
     },
     {
       "label": "PortalNotificationLog",
@@ -682,9 +581,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "sync_status_portal_notification_log",
-      "community": 2,
-      "norm_label": "portalnotificationlog"
+      "community": 6,
+      "norm_label": "portalnotificationlog",
+      "id": "sync_status_portal_notification_log"
     },
     {
       "label": "Notify Integration API",
@@ -695,9 +594,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "sync_status_notify_integration_api",
-      "community": 2,
-      "norm_label": "notify integration api"
+      "community": 6,
+      "norm_label": "notify integration api",
+      "id": "sync_status_notify_integration_api"
     },
     {
       "label": "Notify Consume Service",
@@ -708,9 +607,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "sync_status_notify_consume_service",
-      "community": 2,
-      "norm_label": "notify consume service"
+      "community": 6,
+      "norm_label": "notify consume service",
+      "id": "sync_status_notify_consume_service"
     },
     {
       "label": "Kafka",
@@ -721,9 +620,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "sync_status_kafka",
-      "community": 2,
-      "norm_label": "kafka"
+      "community": 6,
+      "norm_label": "kafka",
+      "id": "sync_status_kafka"
     },
     {
       "label": "3rd Party API",
@@ -734,9 +633,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "sync_status_third_party_api",
-      "community": 2,
-      "norm_label": "3rd party api"
+      "community": 6,
+      "norm_label": "3rd party api",
+      "id": "sync_status_third_party_api"
     },
     {
       "label": "Portal API",
@@ -747,9 +646,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "sync_status_portal_api",
-      "community": 2,
-      "norm_label": "portal api"
+      "community": 6,
+      "norm_label": "portal api",
+      "id": "sync_status_portal_api"
     },
     {
       "label": "AI Patent React Frontend",
@@ -760,9 +659,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "ai_patent_react_frontend",
-      "community": 1,
-      "norm_label": "ai patent react frontend"
+      "community": 5,
+      "norm_label": "ai patent react frontend",
+      "id": "ai_patent_react_frontend"
     },
     {
       "label": "AI Patent Node.js Backend",
@@ -773,9 +672,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "ai_patent_node_backend",
-      "community": 1,
-      "norm_label": "ai patent node.js backend"
+      "community": 5,
+      "norm_label": "ai patent node.js backend",
+      "id": "ai_patent_node_backend"
     },
     {
       "label": "Patent ID and Company Input Handler",
@@ -786,9 +685,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "ai_patent_input_handler",
-      "community": 1,
-      "norm_label": "patent id and company input handler"
+      "community": 5,
+      "norm_label": "patent id and company input handler",
+      "id": "ai_patent_input_handler"
     },
     {
       "label": "OpenAI Prompt Template",
@@ -799,9 +698,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "ai_patent_openai_prompt_template",
-      "community": 1,
-      "norm_label": "openai prompt template"
+      "community": 5,
+      "norm_label": "openai prompt template",
+      "id": "ai_patent_openai_prompt_template"
     },
     {
       "label": "OpenAI API",
@@ -812,9 +711,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "ai_patent_openai_api",
-      "community": 1,
-      "norm_label": "openai api"
+      "community": 5,
+      "norm_label": "openai api",
+      "id": "ai_patent_openai_api"
     },
     {
       "label": "Auto Campaign DomainService",
@@ -825,9 +724,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "auto_campaign_domain_service",
-      "community": 2,
-      "norm_label": "auto campaign domainservice"
+      "community": 6,
+      "norm_label": "auto campaign domainservice",
+      "id": "auto_campaign_domain_service"
     },
     {
       "label": "AutoCampaignHandler Job",
@@ -838,9 +737,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "auto_campaign_handler",
-      "community": 2,
-      "norm_label": "autocampaignhandler job"
+      "community": 6,
+      "norm_label": "autocampaignhandler job",
+      "id": "auto_campaign_handler"
     },
     {
       "label": "AutoCampaignSettleHandler Job",
@@ -851,9 +750,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "auto_campaign_settle_handler",
-      "community": 2,
-      "norm_label": "autocampaignsettlehandler job"
+      "community": 6,
+      "norm_label": "autocampaignsettlehandler job",
+      "id": "auto_campaign_settle_handler"
     },
     {
       "label": "Auto Campaign Third-Party API",
@@ -864,9 +763,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "auto_campaign_third_party_api",
-      "community": 2,
-      "norm_label": "auto campaign third-party api"
+      "community": 6,
+      "norm_label": "auto campaign third-party api",
+      "id": "auto_campaign_third_party_api"
     },
     {
       "label": "Bet Slip States Store",
@@ -877,9 +776,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "bet_slip_states_shared_store",
-      "community": 8,
-      "norm_label": "bet slip states store"
+      "community": 10,
+      "norm_label": "bet slip states store",
+      "id": "bet_slip_states_shared_store"
     },
     {
       "label": "Bet Selection Components",
@@ -890,9 +789,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "bet_slip_states_selection_components",
-      "community": 8,
-      "norm_label": "bet selection components"
+      "community": 10,
+      "norm_label": "bet selection components",
+      "id": "bet_slip_states_selection_components"
     },
     {
       "label": "MCP Processing Pipeline",
@@ -903,9 +802,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "mcp_playwright_processing_pipeline",
-      "community": 6,
-      "norm_label": "mcp processing pipeline"
+      "community": 2,
+      "norm_label": "mcp processing pipeline",
+      "id": "mcp_playwright_processing_pipeline"
     },
     {
       "label": "Context Management",
@@ -916,9 +815,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "mcp_playwright_context_management",
-      "community": 6,
-      "norm_label": "context management"
+      "community": 2,
+      "norm_label": "context management",
+      "id": "mcp_playwright_context_management"
     },
     {
       "label": "Playwright MCP Server",
@@ -929,9 +828,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "mcp_playwright_server",
-      "community": 6,
-      "norm_label": "playwright mcp server"
+      "community": 2,
+      "norm_label": "playwright mcp server",
+      "id": "mcp_playwright_server"
     },
     {
       "label": "LLM API",
@@ -942,9 +841,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "mcp_playwright_llm_api",
-      "community": 6,
-      "norm_label": "llm api"
+      "community": 2,
+      "norm_label": "llm api",
+      "id": "mcp_playwright_llm_api"
     },
     {
       "label": "ResultsComponent",
@@ -955,9 +854,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "dynamic_loading_results_component",
-      "community": 1,
-      "norm_label": "resultscomponent"
+      "community": 5,
+      "norm_label": "resultscomponent",
+      "id": "dynamic_loading_results_component"
     },
     {
       "label": "LayoutConfig State",
@@ -968,9 +867,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "dynamic_loading_layout_config",
-      "community": 1,
-      "norm_label": "layoutconfig state"
+      "community": 5,
+      "norm_label": "layoutconfig state",
+      "id": "dynamic_loading_layout_config"
     },
     {
       "label": "ResultBallLoader",
@@ -981,9 +880,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "dynamic_loading_result_ball_loader",
-      "community": 1,
-      "norm_label": "resultballloader"
+      "community": 5,
+      "norm_label": "resultballloader",
+      "id": "dynamic_loading_result_ball_loader"
     },
     {
       "label": "ResultSummaryLoader",
@@ -994,9 +893,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "dynamic_loading_result_summary_loader",
-      "community": 1,
-      "norm_label": "resultsummaryloader"
+      "community": 5,
+      "norm_label": "resultsummaryloader",
+      "id": "dynamic_loading_result_summary_loader"
     },
     {
       "label": "dynamicMarketSelections",
@@ -1007,9 +906,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "dynamic_loading_counter_dynamic_market_selections",
-      "community": 8,
-      "norm_label": "dynamicmarketselections"
+      "community": 10,
+      "norm_label": "dynamicmarketselections",
+      "id": "dynamic_loading_counter_dynamic_market_selections"
     },
     {
       "label": "Git Flow Branch Promotion",
@@ -1020,9 +919,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "git_flow_branch_promotion",
-      "community": 12,
-      "norm_label": "git flow branch promotion"
+      "community": 15,
+      "norm_label": "git flow branch promotion",
+      "id": "git_flow_branch_promotion"
     },
     {
       "label": "Production Hotfix Sync Back",
@@ -1033,9 +932,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "git_flow_hotfix_sync_back",
-      "community": 12,
-      "norm_label": "production hotfix sync back"
+      "community": 15,
+      "norm_label": "production hotfix sync back",
+      "id": "git_flow_hotfix_sync_back"
     },
     {
       "label": "ClientApp",
@@ -1046,9 +945,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "remain_campaign_client_app",
-      "community": 11,
-      "norm_label": "clientapp"
+      "community": 13,
+      "norm_label": "clientapp",
+      "id": "remain_campaign_client_app"
     },
     {
       "label": "PublicAPI",
@@ -1059,9 +958,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "remain_campaign_public_api",
-      "community": 11,
-      "norm_label": "publicapi"
+      "community": 13,
+      "norm_label": "publicapi",
+      "id": "remain_campaign_public_api"
     },
     {
       "label": "DomainAPI",
@@ -1072,9 +971,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "remain_campaign_domain_api",
-      "community": 11,
-      "norm_label": "domainapi"
+      "community": 13,
+      "norm_label": "domainapi",
+      "id": "remain_campaign_domain_api"
     },
     {
       "label": "Redis remainCampaignCount",
@@ -1085,9 +984,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "remain_campaign_redis",
-      "community": 11,
-      "norm_label": "redis remaincampaigncount"
+      "community": 13,
+      "norm_label": "redis remaincampaigncount",
+      "id": "remain_campaign_redis"
     },
     {
       "label": "Bet Placement Client",
@@ -1098,9 +997,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "token_bet_placement_client",
-      "community": 8,
-      "norm_label": "bet placement client"
+      "community": 10,
+      "norm_label": "bet placement client",
+      "id": "token_bet_placement_client"
     },
     {
       "label": "Bet Placement Server",
@@ -1111,9 +1010,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "token_bet_placement_server",
-      "community": 8,
-      "norm_label": "bet placement server"
+      "community": 10,
+      "norm_label": "bet placement server",
+      "id": "token_bet_placement_server"
     },
     {
       "label": "Active Tokens State",
@@ -1124,9 +1023,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "token_bet_placement_active_tokens",
-      "community": 8,
-      "norm_label": "active tokens state"
+      "community": 10,
+      "norm_label": "active tokens state",
+      "id": "token_bet_placement_active_tokens"
     },
     {
       "label": "OpenClaw Gateway to LLM Upstream",
@@ -1137,9 +1036,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "llm_proxy_cmp_diagram_openclaw_gateway_to_llm_upstream",
-      "community": 4,
-      "norm_label": "openclaw gateway to llm upstream"
+      "community": 8,
+      "norm_label": "openclaw gateway to llm upstream",
+      "id": "llm_proxy_cmp_diagram_openclaw_gateway_to_llm_upstream"
     },
     {
       "label": "OpenClaw Gateway",
@@ -1150,9 +1049,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "llm_proxy_cmp_diagram_openclaw_gateway",
-      "community": 4,
-      "norm_label": "openclaw gateway"
+      "community": 8,
+      "norm_label": "openclaw gateway",
+      "id": "llm_proxy_cmp_diagram_openclaw_gateway"
     },
     {
       "label": "iclaw-openclaw-proxy",
@@ -1163,9 +1062,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "llm_proxy_cmp_diagram_iclaw_openclaw_proxy",
-      "community": 4,
-      "norm_label": "iclaw-openclaw-proxy"
+      "community": 8,
+      "norm_label": "iclaw-openclaw-proxy",
+      "id": "llm_proxy_cmp_diagram_iclaw_openclaw_proxy"
     },
     {
       "label": "LLM upstream",
@@ -1176,9 +1075,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "llm_proxy_cmp_diagram_llm_upstream",
-      "community": 4,
-      "norm_label": "llm upstream"
+      "community": 8,
+      "norm_label": "llm upstream",
+      "id": "llm_proxy_cmp_diagram_llm_upstream"
     },
     {
       "label": "POST /v1/chat/completions",
@@ -1189,9 +1088,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "llm_proxy_cmp_diagram_post_v1_chat_completions",
-      "community": 4,
-      "norm_label": "post /v1/chat/completions"
+      "community": 8,
+      "norm_label": "post /v1/chat/completions",
+      "id": "llm_proxy_cmp_diagram_post_v1_chat_completions"
     },
     {
       "label": "Strip incoming auth headers",
@@ -1202,9 +1101,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "llm_proxy_cmp_diagram_strip_incoming_auth_headers",
-      "community": 4,
-      "norm_label": "strip incoming auth headers"
+      "community": 8,
+      "norm_label": "strip incoming auth headers",
+      "id": "llm_proxy_cmp_diagram_strip_incoming_auth_headers"
     },
     {
       "label": "Inject real LLM_API_KEY from memory",
@@ -1215,9 +1114,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "llm_proxy_cmp_diagram_inject_real_llm_api_key_from_memory",
-      "community": 4,
-      "norm_label": "inject real llm_api_key from memory"
+      "community": 8,
+      "norm_label": "inject real llm_api_key from memory",
+      "id": "llm_proxy_cmp_diagram_inject_real_llm_api_key_from_memory"
     },
     {
       "label": "Real LLM API key",
@@ -1228,9 +1127,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "llm_proxy_cmp_diagram_real_llm_api_key",
-      "community": 4,
-      "norm_label": "real llm api key"
+      "community": 8,
+      "norm_label": "real llm api key",
+      "id": "llm_proxy_cmp_diagram_real_llm_api_key"
     },
     {
       "label": "OpenClaw never sees the real API key",
@@ -1241,9 +1140,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "llm_proxy_cmp_diagram_openclaw_api_key_isolation",
-      "community": 4,
-      "norm_label": "openclaw never sees the real api key"
+      "community": 8,
+      "norm_label": "openclaw never sees the real api key",
+      "id": "llm_proxy_cmp_diagram_openclaw_api_key_isolation"
     },
     {
       "label": "OpenAI, Anthropic, Google, DeepSeek, Ollama, and other upstream providers",
@@ -1254,9 +1153,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "llm_proxy_cmp_diagram_upstream_provider_options",
-      "community": 4,
-      "norm_label": "openai, anthropic, google, deepseek, ollama, and other upstream providers"
+      "community": 8,
+      "norm_label": "openai, anthropic, google, deepseek, ollama, and other upstream providers",
+      "id": "llm_proxy_cmp_diagram_upstream_provider_options"
     },
     {
       "label": "GoGoShop Container Diagram",
@@ -1267,9 +1166,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "System_Design_v1-Container_gogoshop_container_diagram",
-      "community": 0,
-      "norm_label": "gogoshop container diagram"
+      "community": 4,
+      "norm_label": "gogoshop container diagram",
+      "id": "System_Design_v1-Container_gogoshop_container_diagram"
     },
     {
       "label": "User",
@@ -1280,9 +1179,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "System_Design_v1-Container_user",
-      "community": 0,
-      "norm_label": "user"
+      "community": 4,
+      "norm_label": "user",
+      "id": "System_Design_v1-Container_user"
     },
     {
       "label": "Merchant",
@@ -1293,9 +1192,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "System_Design_v1-Container_merchant",
-      "community": 0,
-      "norm_label": "merchant"
+      "community": 4,
+      "norm_label": "merchant",
+      "id": "System_Design_v1-Container_merchant"
     },
     {
       "label": "Shopping Portal",
@@ -1306,9 +1205,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "System_Design_v1-Container_shopping_portal",
-      "community": 0,
-      "norm_label": "shopping portal"
+      "community": 4,
+      "norm_label": "shopping portal",
+      "id": "System_Design_v1-Container_shopping_portal"
     },
     {
       "label": "Back Office",
@@ -1319,9 +1218,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "System_Design_v1-Container_back_office",
-      "community": 0,
-      "norm_label": "back office"
+      "community": 4,
+      "norm_label": "back office",
+      "id": "System_Design_v1-Container_back_office"
     },
     {
       "label": "UserService",
@@ -1332,9 +1231,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "System_Design_v1-Container_user_service",
-      "community": 0,
-      "norm_label": "userservice"
+      "community": 4,
+      "norm_label": "userservice",
+      "id": "System_Design_v1-Container_user_service"
     },
     {
       "label": "ProductService",
@@ -1345,9 +1244,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "System_Design_v1-Container_product_service",
-      "community": 0,
-      "norm_label": "productservice"
+      "community": 4,
+      "norm_label": "productservice",
+      "id": "System_Design_v1-Container_product_service"
     },
     {
       "label": "Firebase Cloud Messaging",
@@ -1358,9 +1257,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "System_Design_v1-Container_firebase_cloud_messaging",
-      "community": 0,
-      "norm_label": "firebase cloud messaging"
+      "community": 4,
+      "norm_label": "firebase cloud messaging",
+      "id": "System_Design_v1-Container_firebase_cloud_messaging"
     },
     {
       "label": "User DB",
@@ -1371,9 +1270,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "System_Design_v1-Container_user_db",
-      "community": 0,
-      "norm_label": "user db"
+      "community": 4,
+      "norm_label": "user db",
+      "id": "System_Design_v1-Container_user_db"
     },
     {
       "label": "Cache",
@@ -1384,9 +1283,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "System_Design_v1-Container_cache",
-      "community": 0,
-      "norm_label": "cache"
+      "community": 4,
+      "norm_label": "cache",
+      "id": "System_Design_v1-Container_cache"
     },
     {
       "label": "Product DB",
@@ -1397,9 +1296,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "System_Design_v1-Container_product_db",
-      "community": 0,
-      "norm_label": "product db"
+      "community": 4,
+      "norm_label": "product db",
+      "id": "System_Design_v1-Container_product_db"
     },
     {
       "label": "Message Queue",
@@ -1410,9 +1309,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "System_Design_v1-Container_message_queue",
-      "community": 0,
-      "norm_label": "message queue"
+      "community": 4,
+      "norm_label": "message queue",
+      "id": "System_Design_v1-Container_message_queue"
     },
     {
       "label": "Real-Time Message",
@@ -1423,9 +1322,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "System_Design_v1-Container_real_time_message",
-      "community": 0,
-      "norm_label": "real-time message"
+      "community": 4,
+      "norm_label": "real-time message",
+      "id": "System_Design_v1-Container_real_time_message"
     },
     {
       "label": "REST API",
@@ -1436,9 +1335,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "System_Design_v1-Container_rest_api",
-      "community": 0,
-      "norm_label": "rest api"
+      "community": 4,
+      "norm_label": "rest api",
+      "id": "System_Design_v1-Container_rest_api"
     },
     {
       "label": "Pub/sub Message",
@@ -1449,9 +1348,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "System_Design_v1-Container_pub_sub_message",
-      "community": 0,
-      "norm_label": "pub/sub message"
+      "community": 4,
+      "norm_label": "pub/sub message",
+      "id": "System_Design_v1-Container_pub_sub_message"
     },
     {
       "label": "User",
@@ -1462,9 +1361,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "system_design_v1_context_user",
-      "community": 5,
-      "norm_label": "user"
+      "community": 9,
+      "norm_label": "user",
+      "id": "system_design_v1_context_user"
     },
     {
       "label": "Merchant",
@@ -1475,9 +1374,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "system_design_v1_context_merchant",
-      "community": 5,
-      "norm_label": "merchant"
+      "community": 9,
+      "norm_label": "merchant",
+      "id": "system_design_v1_context_merchant"
     },
     {
       "label": "Shopping Portal",
@@ -1488,9 +1387,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "system_design_v1_context_shopping_portal",
-      "community": 5,
-      "norm_label": "shopping portal"
+      "community": 9,
+      "norm_label": "shopping portal",
+      "id": "system_design_v1_context_shopping_portal"
     },
     {
       "label": "Back Office",
@@ -1501,9 +1400,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "system_design_v1_context_back_office",
-      "community": 5,
-      "norm_label": "back office"
+      "community": 9,
+      "norm_label": "back office",
+      "id": "system_design_v1_context_back_office"
     },
     {
       "label": "GoGoShop System Context",
@@ -1514,9 +1413,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "system_design_v1_context_gogoshop",
-      "community": 5,
-      "norm_label": "gogoshop system context"
+      "community": 9,
+      "norm_label": "gogoshop system context",
+      "id": "system_design_v1_context_gogoshop"
     },
     {
       "label": "Product",
@@ -1527,9 +1426,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "system_design_v1_context_product",
-      "community": 5,
-      "norm_label": "product"
+      "community": 9,
+      "norm_label": "product",
+      "id": "system_design_v1_context_product"
     },
     {
       "label": "Customer Account",
@@ -1540,9 +1439,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "system_design_v1_context_customer_account",
-      "community": 5,
-      "norm_label": "customer account"
+      "community": 9,
+      "norm_label": "customer account",
+      "id": "system_design_v1_context_customer_account"
     },
     {
       "label": "Store",
@@ -1553,9 +1452,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "system_design_v1_context_store",
-      "community": 5,
-      "norm_label": "store"
+      "community": 9,
+      "norm_label": "store",
+      "id": "system_design_v1_context_store"
     },
     {
       "label": "Promotion",
@@ -1566,9 +1465,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "system_design_v1_context_promotion",
-      "community": 5,
-      "norm_label": "promotion"
+      "community": 9,
+      "norm_label": "promotion",
+      "id": "system_design_v1_context_promotion"
     },
     {
       "label": "Business Report",
@@ -1579,9 +1478,802 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "system_design_v1_context_business_report",
-      "community": 5,
-      "norm_label": "business report"
+      "community": 9,
+      "norm_label": "business report",
+      "id": "system_design_v1_context_business_report"
+    },
+    {
+      "label": "System Design Repository",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": "Max",
+      "contributor": null,
+      "id": "readme_system_design_repo",
+      "community": 1,
+      "norm_label": "system design repository"
+    },
+    {
+      "label": "Architecture Overview",
+      "file_type": "document",
+      "source_file": "architecture/README.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "architecture_readme_overview",
+      "community": 1,
+      "norm_label": "architecture overview"
+    },
+    {
+      "label": "Netflix Video Processing Pipeline Rebuild",
+      "file_type": "document",
+      "source_file": "architecture/netflix/index.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "netflix_index_video_pipeline_rebuild",
+      "community": 1,
+      "norm_label": "netflix video processing pipeline rebuild"
+    },
+    {
+      "label": "Netflix Cosmos Workflow-Driven Platform",
+      "file_type": "document",
+      "source_file": "architecture/netflix/index.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "netflix_cosmos_platform",
+      "community": 1,
+      "norm_label": "netflix cosmos workflow-driven platform"
+    },
+    {
+      "label": "Netflix Reloaded Video Pipeline (Legacy)",
+      "file_type": "document",
+      "source_file": "architecture/netflix/index.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "netflix_reloaded_pipeline",
+      "community": 1,
+      "norm_label": "netflix reloaded video pipeline (legacy)"
+    },
+    {
+      "label": "VIS - Video Inspection Service",
+      "file_type": "document",
+      "source_file": "architecture/netflix/index.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "netflix_vis_service",
+      "community": 1,
+      "norm_label": "vis - video inspection service"
+    },
+    {
+      "label": "CAS - Complexity Analysis Service",
+      "file_type": "document",
+      "source_file": "architecture/netflix/index.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "netflix_cas_service",
+      "community": 1,
+      "norm_label": "cas - complexity analysis service"
+    },
+    {
+      "label": "LGS - Ladder Generation Service",
+      "file_type": "document",
+      "source_file": "architecture/netflix/index.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "netflix_lgs_service",
+      "community": 1,
+      "norm_label": "lgs - ladder generation service"
+    },
+    {
+      "label": "VES - Video Encoding Service",
+      "file_type": "document",
+      "source_file": "architecture/netflix/index.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "netflix_ves_service",
+      "community": 3,
+      "norm_label": "ves - video encoding service"
+    },
+    {
+      "label": "VQS - Video Quality Service",
+      "file_type": "document",
+      "source_file": "architecture/netflix/index.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "netflix_vqs_service",
+      "community": 1,
+      "norm_label": "vqs - video quality service"
+    },
+    {
+      "label": "VVS - Video Validation Service",
+      "file_type": "document",
+      "source_file": "architecture/netflix/index.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "netflix_vvs_service",
+      "community": 1,
+      "norm_label": "vvs - video validation service"
+    },
+    {
+      "label": "Optimus - Cosmos API Layer",
+      "file_type": "document",
+      "source_file": "architecture/netflix/index.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "netflix_optimus_api_layer",
+      "community": 1,
+      "norm_label": "optimus - cosmos api layer"
+    },
+    {
+      "label": "Plato - Cosmos Workflow Layer",
+      "file_type": "document",
+      "source_file": "architecture/netflix/index.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "netflix_plato_workflow_layer",
+      "community": 1,
+      "norm_label": "plato - cosmos workflow layer"
+    },
+    {
+      "label": "Stratum - Cosmos Serverless Compute Layer",
+      "file_type": "document",
+      "source_file": "architecture/netflix/index.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "netflix_stratum_compute_layer",
+      "community": 1,
+      "norm_label": "stratum - cosmos serverless compute layer"
+    },
+    {
+      "label": "VES Chunked Parallel Encoding Strategy",
+      "file_type": "document",
+      "source_file": "architecture/netflix/index.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "netflix_ves_chunked_encoding",
+      "community": 3,
+      "norm_label": "ves chunked parallel encoding strategy"
+    },
+    {
+      "label": "Rationale: Microservice Boundaries Hide Execution Strategy",
+      "file_type": "document",
+      "source_file": "architecture/netflix/index.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "netflix_index_rationale_microservice_boundaries",
+      "community": 1,
+      "norm_label": "rationale: microservice boundaries hide execution strategy"
+    },
+    {
+      "label": "Rationale: Workflow-Driven Platform over Synchronous Request Chain",
+      "file_type": "document",
+      "source_file": "architecture/netflix/index.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "netflix_index_rationale_workflow_driven_platform",
+      "community": 1,
+      "norm_label": "rationale: workflow-driven platform over synchronous request chain"
+    },
+    {
+      "label": "Uber Fulfillment Platform Re-architecture",
+      "file_type": "document",
+      "source_file": "architecture/uber/index.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "uber_index_fulfillment_rearchitecture",
+      "community": 0,
+      "norm_label": "uber fulfillment platform re-architecture"
+    },
+    {
+      "label": "Uber Trip Entity",
+      "file_type": "document",
+      "source_file": "architecture/uber/index.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "uber_trip_entity",
+      "community": 0,
+      "norm_label": "uber trip entity"
+    },
+    {
+      "label": "Uber Supply Entity (Driver Plan + Waypoints)",
+      "file_type": "document",
+      "source_file": "architecture/uber/index.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "uber_supply_entity",
+      "community": 0,
+      "norm_label": "uber supply entity (driver plan + waypoints)"
+    },
+    {
+      "label": "Business Transaction Coordinator (BTC)",
+      "file_type": "document",
+      "source_file": "architecture/uber/index.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "uber_btc_coordinator",
+      "community": 0,
+      "norm_label": "business transaction coordinator (btc)"
+    },
+    {
+      "label": "Uber Entity Statecharts (Trip, Supply, Jobs)",
+      "file_type": "document",
+      "source_file": "architecture/uber/index.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "uber_entity_statecharts",
+      "community": 0,
+      "norm_label": "uber entity statecharts (trip, supply, jobs)"
+    },
+    {
+      "label": "Uber ORM Layer (Transaction + Relationship Abstraction)",
+      "file_type": "document",
+      "source_file": "architecture/uber/index.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "uber_orm_layer",
+      "community": 0,
+      "norm_label": "uber orm layer (transaction + relationship abstraction)"
+    },
+    {
+      "label": "Google Cloud Spanner (Uber Fulfillment Storage)",
+      "file_type": "document",
+      "source_file": "architecture/uber/index.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "uber_spanner_storage",
+      "community": 0,
+      "norm_label": "google cloud spanner (uber fulfillment storage)"
+    },
+    {
+      "label": "LATE Action Table (Durable Post-Commit Side Effects)",
+      "file_type": "document",
+      "source_file": "architecture/uber/index.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "uber_late_action_table",
+      "community": 0,
+      "norm_label": "late action table (durable post-commit side effects)"
+    },
+    {
+      "label": "Ringpop Ownership (Legacy Serial Queue + In-Memory Lock)",
+      "file_type": "document",
+      "source_file": "architecture/uber/index.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "uber_ringpop_legacy",
+      "community": 0,
+      "norm_label": "ringpop ownership (legacy serial queue + in-memory lock)"
+    },
+    {
+      "label": "Saga + RPC Coordination (Legacy)",
+      "file_type": "document",
+      "source_file": "architecture/uber/index.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "uber_saga_coordination_legacy",
+      "community": 0,
+      "norm_label": "saga + rpc coordination (legacy)"
+    },
+    {
+      "label": "Rationale: Consistency Upgrade Changes Programming Model",
+      "file_type": "document",
+      "source_file": "architecture/uber/index.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "uber_index_rationale_consistency_upgrade",
+      "community": 0,
+      "norm_label": "rationale: consistency upgrade changes programming model"
+    },
+    {
+      "label": "Rationale: Post-Commit Effects Need Durable Handoff",
+      "file_type": "document",
+      "source_file": "architecture/uber/index.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "uber_index_rationale_durable_post_commit",
+      "community": 0,
+      "norm_label": "rationale: post-commit effects need durable handoff"
+    },
+    {
+      "label": "Airbnb Viaduct Data-Oriented Service Mesh",
+      "file_type": "document",
+      "source_file": "survey/airbnb-viaduct-data-mesh.md",
+      "source_location": null,
+      "source_url": "https://airbnb.tech/infrastructure/viaduct-five-years-on-modernizing-the-data-oriented-service-mesh/",
+      "captured_at": "2025-09-17",
+      "author": "Adam Miskiewicz, Raymie Stata",
+      "contributor": null,
+      "id": "survey_airbnb_viaduct",
+      "community": 14,
+      "norm_label": "airbnb viaduct data-oriented service mesh"
+    },
+    {
+      "label": "Viaduct Central GraphQL Execution Engine",
+      "file_type": "document",
+      "source_file": "survey/airbnb-viaduct-data-mesh.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "survey_airbnb_viaduct_graphql_engine",
+      "community": 14,
+      "norm_label": "viaduct central graphql execution engine"
+    },
+    {
+      "label": "Viaduct Tenant Modules (Hosted Business Logic)",
+      "file_type": "document",
+      "source_file": "survey/airbnb-viaduct-data-mesh.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "survey_airbnb_viaduct_tenant_modules",
+      "community": 14,
+      "norm_label": "viaduct tenant modules (hosted business logic)"
+    },
+    {
+      "label": "Cloudflare Images Pipeline",
+      "file_type": "document",
+      "source_file": "survey/cloudflare-images-pipeline.md",
+      "source_location": null,
+      "source_url": "https://blog.cloudflare.com/announcing-cloudflare-images/",
+      "captured_at": "2021-09-15",
+      "author": "Zaid Farooqui",
+      "contributor": null,
+      "id": "survey_cloudflare_images",
+      "community": 3,
+      "norm_label": "cloudflare images pipeline"
+    },
+    {
+      "label": "Cloudflare Images Signed URL Access Control",
+      "file_type": "document",
+      "source_file": "survey/cloudflare-images-pipeline.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "survey_cloudflare_images_signed_url",
+      "community": 3,
+      "norm_label": "cloudflare images signed url access control"
+    },
+    {
+      "label": "Cloudflare Images Variant Generation and CDN Delivery",
+      "file_type": "document",
+      "source_file": "survey/cloudflare-images-pipeline.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "survey_cloudflare_images_variant_generation",
+      "community": 3,
+      "norm_label": "cloudflare images variant generation and cdn delivery"
+    },
+    {
+      "label": "Design Instagram Topic Index",
+      "file_type": "document",
+      "source_file": "survey/design-instagram-index.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": "2026-05-22",
+      "author": null,
+      "contributor": null,
+      "id": "survey_design_instagram",
+      "community": 3,
+      "norm_label": "design instagram topic index"
+    },
+    {
+      "label": "Design Netflix Topic Index",
+      "file_type": "document",
+      "source_file": "survey/design-netflix-index.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": "2026-05-22",
+      "author": null,
+      "contributor": null,
+      "id": "survey_design_netflix",
+      "community": 1,
+      "norm_label": "design netflix topic index"
+    },
+    {
+      "label": "Design Uber Topic Index",
+      "file_type": "document",
+      "source_file": "survey/design-uber-index.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": "2026-05-22",
+      "author": null,
+      "contributor": null,
+      "id": "survey_design_uber",
+      "community": 0,
+      "norm_label": "design uber topic index"
+    },
+    {
+      "label": "Design WhatsApp Topic Index",
+      "file_type": "document",
+      "source_file": "survey/design-whatsapp-index.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": "2026-05-22",
+      "author": null,
+      "contributor": null,
+      "id": "survey_design_whatsapp",
+      "community": 3,
+      "norm_label": "design whatsapp topic index"
+    },
+    {
+      "label": "Design YouTube Topic Index",
+      "file_type": "document",
+      "source_file": "survey/design-youtube-index.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": "2026-05-22",
+      "author": null,
+      "contributor": null,
+      "id": "survey_design_youtube",
+      "community": 19,
+      "norm_label": "design youtube topic index"
+    },
+    {
+      "label": "Discord Message Storage (Trillions of Messages)",
+      "file_type": "document",
+      "source_file": "survey/discord-message-storage.md",
+      "source_location": null,
+      "source_url": "https://discord.com/blog/how-discord-stores-trillions-of-messages",
+      "captured_at": "2023-03-06",
+      "author": "Bo Ingram",
+      "contributor": null,
+      "id": "survey_discord_message_storage",
+      "community": 3,
+      "norm_label": "discord message storage (trillions of messages)"
+    },
+    {
+      "label": "Discord Cassandra to ScyllaDB Migration",
+      "file_type": "document",
+      "source_file": "survey/discord-message-storage.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "survey_discord_scylladb_migration",
+      "community": 3,
+      "norm_label": "discord cassandra to scylladb migration"
+    },
+    {
+      "label": "Discord Request Coalescing for Hot Channel Reads",
+      "file_type": "document",
+      "source_file": "survey/discord-message-storage.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "survey_discord_request_coalescing",
+      "community": 3,
+      "norm_label": "discord request coalescing for hot channel reads"
+    },
+    {
+      "label": "Dropbox Object Store Storage Abstraction",
+      "file_type": "document",
+      "source_file": "survey/dropbox-object-store.md",
+      "source_location": null,
+      "source_url": "https://dropbox.tech/infrastructure/abstracting-cloud-storage-backends-with-object-store",
+      "captured_at": "2022-10-11",
+      "author": "Lawrence Xing",
+      "contributor": null,
+      "id": "survey_dropbox_object_store",
+      "community": 3,
+      "norm_label": "dropbox object store storage abstraction"
+    },
+    {
+      "label": "Dropbox Object Store PUT Batching and Chunking",
+      "file_type": "document",
+      "source_file": "survey/dropbox-object-store.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "survey_dropbox_object_store_batching",
+      "community": 3,
+      "norm_label": "dropbox object store put batching and chunking"
+    },
+    {
+      "label": "Dropbox Object Store MySQL Metadata Layer",
+      "file_type": "document",
+      "source_file": "survey/dropbox-object-store.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "survey_dropbox_object_store_metadata",
+      "community": 3,
+      "norm_label": "dropbox object store mysql metadata layer"
+    },
+    {
+      "label": "Figma Multiplayer Reliability",
+      "file_type": "document",
+      "source_file": "survey/figma-multiplayer-reliability.md",
+      "source_location": null,
+      "source_url": "https://www.figma.com/blog/making-multiplayer-more-reliable/",
+      "captured_at": "2022-10-20",
+      "author": "Darren Tsung",
+      "contributor": null,
+      "id": "survey_figma_multiplayer_reliability",
+      "community": 3,
+      "norm_label": "figma multiplayer reliability"
+    },
+    {
+      "label": "Figma Write-Ahead Log (Change Journal)",
+      "file_type": "document",
+      "source_file": "survey/figma-multiplayer-reliability.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "survey_figma_write_ahead_log",
+      "community": 3,
+      "norm_label": "figma write-ahead log (change journal)"
+    },
+    {
+      "label": "Figma Periodic Checkpoint Model",
+      "file_type": "document",
+      "source_file": "survey/figma-multiplayer-reliability.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "survey_figma_checkpoint_model",
+      "community": 3,
+      "norm_label": "figma periodic checkpoint model"
+    },
+    {
+      "label": "GitHub Blackbird Code Search Engine",
+      "file_type": "document",
+      "source_file": "survey/github-code-search.md",
+      "source_location": null,
+      "source_url": "https://github.blog/engineering/the-technology-behind-githubs-new-code-search/",
+      "captured_at": "2023-02-06",
+      "author": "Timothy Clem",
+      "contributor": null,
+      "id": "survey_github_code_search",
+      "community": 16,
+      "norm_label": "github blackbird code search engine"
+    },
+    {
+      "label": "GitHub Code Search Indexing Pipeline",
+      "file_type": "document",
+      "source_file": "survey/github-code-search.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "survey_github_code_search_indexing",
+      "community": 16,
+      "norm_label": "github code search indexing pipeline"
+    },
+    {
+      "label": "Meta FOQS Distributed Priority Queue",
+      "file_type": "document",
+      "source_file": "survey/meta-foqs-priority-queue.md",
+      "source_location": null,
+      "source_url": "https://engineering.fb.com/2021/02/22/production-engineering/foqs-scaling-a-distributed-priority-queue/",
+      "captured_at": "2021-02-22",
+      "author": "Akshay Nanavati, Girish Joshi",
+      "contributor": null,
+      "id": "survey_meta_foqs_priority_queue",
+      "community": 0,
+      "norm_label": "meta foqs distributed priority queue"
+    },
+    {
+      "label": "FOQS Multi-Tenant Topic and Consumer Model",
+      "file_type": "document",
+      "source_file": "survey/meta-foqs-priority-queue.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "survey_meta_foqs_multi_tenant",
+      "community": 0,
+      "norm_label": "foqs multi-tenant topic and consumer model"
+    },
+    {
+      "label": "Netflix Recommendation Foundation Model",
+      "file_type": "document",
+      "source_file": "survey/netflix-recommendation-foundation-model.md",
+      "source_location": null,
+      "source_url": "https://netflixtechblog.com/foundation-model-for-personalized-recommendation-1a0bd8e02d39",
+      "captured_at": "2025-03-21",
+      "author": "Ko-Jen Hsiao, Yesu Feng, Sudarshan Lamkhede",
+      "contributor": null,
+      "id": "survey_netflix_recommendation_foundation_model",
+      "community": 1,
+      "norm_label": "netflix recommendation foundation model"
+    },
+    {
+      "label": "Netflix Preference Embeddings for Downstream Consumers",
+      "file_type": "document",
+      "source_file": "survey/netflix-recommendation-foundation-model.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "survey_netflix_recommendation_embeddings",
+      "community": 1,
+      "norm_label": "netflix preference embeddings for downstream consumers"
+    },
+    {
+      "label": "Stripe Ledger Money Movement System",
+      "file_type": "document",
+      "source_file": "survey/stripe-ledger-money-movement.md",
+      "source_location": null,
+      "source_url": "https://stripe.dev/blog/ledger-stripe-system-for-tracking-and-validating-money-movement",
+      "captured_at": "2024-02-16",
+      "author": "Ilya Ganelin",
+      "contributor": null,
+      "id": "survey_stripe_ledger",
+      "community": 0,
+      "norm_label": "stripe ledger money movement system"
+    },
+    {
+      "label": "Stripe Ledger Immutable Transaction Model",
+      "file_type": "document",
+      "source_file": "survey/stripe-ledger-money-movement.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "survey_stripe_ledger_immutability",
+      "community": 0,
+      "norm_label": "stripe ledger immutable transaction model"
+    },
+    {
+      "label": "Stripe Ledger Payment State Machine",
+      "file_type": "document",
+      "source_file": "survey/stripe-ledger-money-movement.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "survey_stripe_ledger_state_machine",
+      "community": 0,
+      "norm_label": "stripe ledger payment state machine"
+    },
+    {
+      "label": "Uber Next Gen Push Platform on gRPC",
+      "file_type": "document",
+      "source_file": "survey/uber-realtime-push-platform.md",
+      "source_location": null,
+      "source_url": "https://www.uber.com/us/en/blog/ubers-next-gen-push-platform-on-grpc/",
+      "captured_at": "2022-08-16",
+      "author": "Anirudh Raja, Shivani Bhatia, Shahbaz Kaladiya",
+      "contributor": null,
+      "id": "survey_uber_push_platform",
+      "community": 0,
+      "norm_label": "uber next gen push platform on grpc"
+    },
+    {
+      "label": "Uber gRPC Bidirectional Streaming (vs SSE)",
+      "file_type": "document",
+      "source_file": "survey/uber-realtime-push-platform.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "survey_uber_push_grpc_bidirectional",
+      "community": 0,
+      "norm_label": "uber grpc bidirectional streaming (vs sse)"
+    },
+    {
+      "label": "RAMEN Backend for Push Message Delivery",
+      "file_type": "document",
+      "source_file": "survey/uber-realtime-push-platform.md",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "survey_uber_push_ramen_backend",
+      "community": 0,
+      "norm_label": "ramen backend for push message delivery"
     }
   ],
   "links": [
@@ -2988,155 +3680,846 @@
       "_tgt": "system_design_v1_context_business_report",
       "source": "system_design_v1_context_back_office",
       "target": "system_design_v1_context_business_report"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "readme_system_design_repo",
+      "_tgt": "architecture_readme_overview",
+      "source": "readme_system_design_repo",
+      "target": "architecture_readme_overview"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "readme_system_design_repo",
+      "_tgt": "netflix_index_video_pipeline_rebuild",
+      "source": "readme_system_design_repo",
+      "target": "netflix_index_video_pipeline_rebuild"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "readme_system_design_repo",
+      "_tgt": "uber_index_fulfillment_rearchitecture",
+      "source": "readme_system_design_repo",
+      "target": "uber_index_fulfillment_rearchitecture"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "architecture/README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "architecture_readme_overview",
+      "_tgt": "netflix_index_video_pipeline_rebuild",
+      "source": "architecture_readme_overview",
+      "target": "netflix_index_video_pipeline_rebuild"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "architecture/README.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "architecture_readme_overview",
+      "_tgt": "uber_index_fulfillment_rearchitecture",
+      "source": "architecture_readme_overview",
+      "target": "uber_index_fulfillment_rearchitecture"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "architecture/netflix/index.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "netflix_index_video_pipeline_rebuild",
+      "_tgt": "survey_design_netflix",
+      "source": "netflix_index_video_pipeline_rebuild",
+      "target": "survey_design_netflix"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "architecture/netflix/index.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "netflix_index_video_pipeline_rebuild",
+      "_tgt": "netflix_cosmos_platform",
+      "source": "netflix_index_video_pipeline_rebuild",
+      "target": "netflix_cosmos_platform"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "architecture/netflix/index.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "netflix_index_video_pipeline_rebuild",
+      "_tgt": "netflix_reloaded_pipeline",
+      "source": "netflix_index_video_pipeline_rebuild",
+      "target": "netflix_reloaded_pipeline"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "architecture/netflix/index.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "netflix_cosmos_platform",
+      "_tgt": "netflix_vis_service",
+      "source": "netflix_cosmos_platform",
+      "target": "netflix_vis_service"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "architecture/netflix/index.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "netflix_cosmos_platform",
+      "_tgt": "netflix_cas_service",
+      "source": "netflix_cosmos_platform",
+      "target": "netflix_cas_service"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "architecture/netflix/index.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "netflix_cosmos_platform",
+      "_tgt": "netflix_lgs_service",
+      "source": "netflix_cosmos_platform",
+      "target": "netflix_lgs_service"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "architecture/netflix/index.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "netflix_cosmos_platform",
+      "_tgt": "netflix_ves_service",
+      "source": "netflix_cosmos_platform",
+      "target": "netflix_ves_service"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "architecture/netflix/index.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "netflix_cosmos_platform",
+      "_tgt": "netflix_vqs_service",
+      "source": "netflix_cosmos_platform",
+      "target": "netflix_vqs_service"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "architecture/netflix/index.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "netflix_cosmos_platform",
+      "_tgt": "netflix_vvs_service",
+      "source": "netflix_cosmos_platform",
+      "target": "netflix_vvs_service"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "architecture/netflix/index.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "netflix_cosmos_platform",
+      "_tgt": "netflix_optimus_api_layer",
+      "source": "netflix_cosmos_platform",
+      "target": "netflix_optimus_api_layer"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "architecture/netflix/index.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "netflix_cosmos_platform",
+      "_tgt": "netflix_plato_workflow_layer",
+      "source": "netflix_cosmos_platform",
+      "target": "netflix_plato_workflow_layer"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "architecture/netflix/index.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "netflix_cosmos_platform",
+      "_tgt": "netflix_stratum_compute_layer",
+      "source": "netflix_cosmos_platform",
+      "target": "netflix_stratum_compute_layer"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "architecture/netflix/index.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "netflix_reloaded_pipeline",
+      "_tgt": "netflix_cosmos_platform",
+      "source": "netflix_cosmos_platform",
+      "target": "netflix_reloaded_pipeline"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "architecture/netflix/index.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "netflix_index_rationale_microservice_boundaries",
+      "_tgt": "netflix_cosmos_platform",
+      "source": "netflix_cosmos_platform",
+      "target": "netflix_index_rationale_microservice_boundaries"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "architecture/netflix/index.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "netflix_index_rationale_workflow_driven_platform",
+      "_tgt": "netflix_cosmos_platform",
+      "source": "netflix_cosmos_platform",
+      "target": "netflix_index_rationale_workflow_driven_platform"
+    },
+    {
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "architecture/netflix/index.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "netflix_ves_service",
+      "_tgt": "netflix_ves_chunked_encoding",
+      "source": "netflix_ves_service",
+      "target": "netflix_ves_chunked_encoding"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "architecture/netflix/index.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "netflix_optimus_api_layer",
+      "_tgt": "netflix_plato_workflow_layer",
+      "source": "netflix_optimus_api_layer",
+      "target": "netflix_plato_workflow_layer"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "architecture/netflix/index.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "netflix_plato_workflow_layer",
+      "_tgt": "netflix_stratum_compute_layer",
+      "source": "netflix_plato_workflow_layer",
+      "target": "netflix_stratum_compute_layer"
+    },
+    {
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.65,
+      "source_file": "architecture/netflix/index.md",
+      "source_location": null,
+      "weight": 0.65,
+      "_src": "netflix_ves_chunked_encoding",
+      "_tgt": "survey_dropbox_object_store_batching",
+      "source": "netflix_ves_chunked_encoding",
+      "target": "survey_dropbox_object_store_batching"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "architecture/uber/index.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "uber_index_fulfillment_rearchitecture",
+      "_tgt": "survey_design_uber",
+      "source": "uber_index_fulfillment_rearchitecture",
+      "target": "survey_design_uber"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "architecture/uber/index.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "uber_index_fulfillment_rearchitecture",
+      "_tgt": "uber_trip_entity",
+      "source": "uber_index_fulfillment_rearchitecture",
+      "target": "uber_trip_entity"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "architecture/uber/index.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "uber_index_fulfillment_rearchitecture",
+      "_tgt": "uber_supply_entity",
+      "source": "uber_index_fulfillment_rearchitecture",
+      "target": "uber_supply_entity"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "architecture/uber/index.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "uber_index_fulfillment_rearchitecture",
+      "_tgt": "uber_btc_coordinator",
+      "source": "uber_index_fulfillment_rearchitecture",
+      "target": "uber_btc_coordinator"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "architecture/uber/index.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "uber_index_fulfillment_rearchitecture",
+      "_tgt": "uber_entity_statecharts",
+      "source": "uber_index_fulfillment_rearchitecture",
+      "target": "uber_entity_statecharts"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "architecture/uber/index.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "uber_index_fulfillment_rearchitecture",
+      "_tgt": "uber_orm_layer",
+      "source": "uber_index_fulfillment_rearchitecture",
+      "target": "uber_orm_layer"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "architecture/uber/index.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "uber_index_fulfillment_rearchitecture",
+      "_tgt": "uber_spanner_storage",
+      "source": "uber_index_fulfillment_rearchitecture",
+      "target": "uber_spanner_storage"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "architecture/uber/index.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "uber_index_fulfillment_rearchitecture",
+      "_tgt": "uber_late_action_table",
+      "source": "uber_index_fulfillment_rearchitecture",
+      "target": "uber_late_action_table"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "architecture/uber/index.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "uber_index_fulfillment_rearchitecture",
+      "_tgt": "uber_ringpop_legacy",
+      "source": "uber_index_fulfillment_rearchitecture",
+      "target": "uber_ringpop_legacy"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "architecture/uber/index.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "uber_index_fulfillment_rearchitecture",
+      "_tgt": "uber_saga_coordination_legacy",
+      "source": "uber_index_fulfillment_rearchitecture",
+      "target": "uber_saga_coordination_legacy"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "architecture/uber/index.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "uber_btc_coordinator",
+      "_tgt": "uber_entity_statecharts",
+      "source": "uber_btc_coordinator",
+      "target": "uber_entity_statecharts"
+    },
+    {
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.72,
+      "source_file": "architecture/uber/index.md",
+      "source_location": null,
+      "weight": 0.72,
+      "_src": "uber_entity_statecharts",
+      "_tgt": "survey_stripe_ledger_state_machine",
+      "source": "uber_entity_statecharts",
+      "target": "survey_stripe_ledger_state_machine"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "architecture/uber/index.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "uber_orm_layer",
+      "_tgt": "uber_spanner_storage",
+      "source": "uber_orm_layer",
+      "target": "uber_spanner_storage"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "architecture/uber/index.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "uber_orm_layer",
+      "_tgt": "uber_late_action_table",
+      "source": "uber_orm_layer",
+      "target": "uber_late_action_table"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "architecture/uber/index.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "uber_index_rationale_consistency_upgrade",
+      "_tgt": "uber_spanner_storage",
+      "source": "uber_spanner_storage",
+      "target": "uber_index_rationale_consistency_upgrade"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "architecture/uber/index.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "uber_index_rationale_durable_post_commit",
+      "_tgt": "uber_late_action_table",
+      "source": "uber_late_action_table",
+      "target": "uber_index_rationale_durable_post_commit"
+    },
+    {
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.68,
+      "source_file": "architecture/uber/index.md",
+      "source_location": null,
+      "weight": 0.68,
+      "_src": "uber_late_action_table",
+      "_tgt": "survey_meta_foqs_priority_queue",
+      "source": "uber_late_action_table",
+      "target": "survey_meta_foqs_priority_queue"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "survey/airbnb-viaduct-data-mesh.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "survey_airbnb_viaduct",
+      "_tgt": "survey_airbnb_viaduct_graphql_engine",
+      "source": "survey_airbnb_viaduct",
+      "target": "survey_airbnb_viaduct_graphql_engine"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "survey/airbnb-viaduct-data-mesh.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "survey_airbnb_viaduct",
+      "_tgt": "survey_airbnb_viaduct_tenant_modules",
+      "source": "survey_airbnb_viaduct",
+      "target": "survey_airbnb_viaduct_tenant_modules"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "survey/design-instagram-index.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "survey_design_instagram",
+      "_tgt": "survey_cloudflare_images",
+      "source": "survey_cloudflare_images",
+      "target": "survey_design_instagram"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "survey/cloudflare-images-pipeline.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "survey_cloudflare_images",
+      "_tgt": "survey_cloudflare_images_signed_url",
+      "source": "survey_cloudflare_images",
+      "target": "survey_cloudflare_images_signed_url"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "survey/cloudflare-images-pipeline.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "survey_cloudflare_images",
+      "_tgt": "survey_cloudflare_images_variant_generation",
+      "source": "survey_cloudflare_images",
+      "target": "survey_cloudflare_images_variant_generation"
+    },
+    {
+      "relation": "semantically_similar_to",
+      "confidence": "AMBIGUOUS",
+      "confidence_score": 0.2,
+      "source_file": "survey/cloudflare-images-pipeline.md",
+      "source_location": null,
+      "weight": 0.2,
+      "_src": "survey_cloudflare_images_variant_generation",
+      "_tgt": "survey_discord_scylladb_migration",
+      "source": "survey_cloudflare_images_variant_generation",
+      "target": "survey_discord_scylladb_migration"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "survey/design-netflix-index.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "survey_netflix_recommendation_foundation_model",
+      "_tgt": "survey_design_netflix",
+      "source": "survey_design_netflix",
+      "target": "survey_netflix_recommendation_foundation_model"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "survey/design-uber-index.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "survey_uber_push_platform",
+      "_tgt": "survey_design_uber",
+      "source": "survey_design_uber",
+      "target": "survey_uber_push_platform"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "survey/design-whatsapp-index.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "survey_design_whatsapp",
+      "_tgt": "survey_discord_message_storage",
+      "source": "survey_design_whatsapp",
+      "target": "survey_discord_message_storage"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "survey/discord-message-storage.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "survey_discord_message_storage",
+      "_tgt": "survey_discord_scylladb_migration",
+      "source": "survey_discord_message_storage",
+      "target": "survey_discord_scylladb_migration"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "survey/discord-message-storage.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "survey_discord_message_storage",
+      "_tgt": "survey_discord_request_coalescing",
+      "source": "survey_discord_message_storage",
+      "target": "survey_discord_request_coalescing"
+    },
+    {
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.6,
+      "source_file": "survey/discord-message-storage.md",
+      "source_location": null,
+      "weight": 0.6,
+      "_src": "survey_discord_scylladb_migration",
+      "_tgt": "survey_dropbox_object_store_metadata",
+      "source": "survey_discord_scylladb_migration",
+      "target": "survey_dropbox_object_store_metadata"
+    },
+    {
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.62,
+      "source_file": "survey/discord-message-storage.md",
+      "source_location": null,
+      "weight": 0.62,
+      "_src": "survey_discord_request_coalescing",
+      "_tgt": "survey_figma_write_ahead_log",
+      "source": "survey_discord_request_coalescing",
+      "target": "survey_figma_write_ahead_log"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "survey/dropbox-object-store.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "survey_dropbox_object_store",
+      "_tgt": "survey_dropbox_object_store_batching",
+      "source": "survey_dropbox_object_store",
+      "target": "survey_dropbox_object_store_batching"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "survey/dropbox-object-store.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "survey_dropbox_object_store",
+      "_tgt": "survey_dropbox_object_store_metadata",
+      "source": "survey_dropbox_object_store",
+      "target": "survey_dropbox_object_store_metadata"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "survey/figma-multiplayer-reliability.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "survey_figma_multiplayer_reliability",
+      "_tgt": "survey_figma_write_ahead_log",
+      "source": "survey_figma_multiplayer_reliability",
+      "target": "survey_figma_write_ahead_log"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "survey/figma-multiplayer-reliability.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "survey_figma_multiplayer_reliability",
+      "_tgt": "survey_figma_checkpoint_model",
+      "source": "survey_figma_multiplayer_reliability",
+      "target": "survey_figma_checkpoint_model"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "survey/figma-multiplayer-reliability.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "survey_figma_checkpoint_model",
+      "_tgt": "survey_figma_write_ahead_log",
+      "source": "survey_figma_write_ahead_log",
+      "target": "survey_figma_checkpoint_model"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "survey/github-code-search.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "survey_github_code_search",
+      "_tgt": "survey_github_code_search_indexing",
+      "source": "survey_github_code_search",
+      "target": "survey_github_code_search_indexing"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "survey/meta-foqs-priority-queue.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "survey_meta_foqs_priority_queue",
+      "_tgt": "survey_meta_foqs_multi_tenant",
+      "source": "survey_meta_foqs_priority_queue",
+      "target": "survey_meta_foqs_multi_tenant"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "survey/netflix-recommendation-foundation-model.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "survey_netflix_recommendation_foundation_model",
+      "_tgt": "survey_netflix_recommendation_embeddings",
+      "source": "survey_netflix_recommendation_foundation_model",
+      "target": "survey_netflix_recommendation_embeddings"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "survey/stripe-ledger-money-movement.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "survey_stripe_ledger",
+      "_tgt": "survey_stripe_ledger_immutability",
+      "source": "survey_stripe_ledger",
+      "target": "survey_stripe_ledger_immutability"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "survey/stripe-ledger-money-movement.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "survey_stripe_ledger",
+      "_tgt": "survey_stripe_ledger_state_machine",
+      "source": "survey_stripe_ledger",
+      "target": "survey_stripe_ledger_state_machine"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "survey/uber-realtime-push-platform.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "survey_uber_push_platform",
+      "_tgt": "survey_uber_push_grpc_bidirectional",
+      "source": "survey_uber_push_platform",
+      "target": "survey_uber_push_grpc_bidirectional"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "survey/uber-realtime-push-platform.md",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "survey_uber_push_platform",
+      "_tgt": "survey_uber_push_ramen_backend",
+      "source": "survey_uber_push_platform",
+      "target": "survey_uber_push_ramen_backend"
     }
   ],
   "hyperedges": [
     {
-      "id": "xprompt_multi_llm_orchestration",
-      "label": "XPrompt Multi-LLM Orchestration Flow",
+      "id": "netflix_cosmos_video_pipeline_services",
+      "label": "Netflix Cosmos Video Processing Pipeline (VIS \u00e2\u2020\u2019 CAS \u00e2\u2020\u2019 LGS \u00e2\u2020\u2019 VES \u00e2\u2020\u2019 VQS \u00e2\u2020\u2019 VVS)",
       "nodes": [
-        "built_in_ai_on_chrome_portal",
-        "built_in_ai_on_chrome_background_service_worker",
-        "built_in_ai_on_chrome_executor",
-        "built_in_ai_on_chrome_llm_providers",
-        "built_in_ai_on_chrome_api"
+        "netflix_vis_service",
+        "netflix_cas_service",
+        "netflix_lgs_service",
+        "netflix_ves_service",
+        "netflix_vqs_service",
+        "netflix_vvs_service",
+        "netflix_cosmos_platform"
       ],
       "relation": "participate_in",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "architecture/ai-integration/built-in-ai-on-chrome.md"
+      "source_file": "architecture/netflix/index.md"
     },
     {
-      "id": "notification_status_sync_flow",
-      "label": "Notification Status Sync Flow",
+      "id": "uber_new_fulfillment_platform_components",
+      "label": "Uber New Fulfillment Platform: BTC + Statecharts + ORM + Spanner + LATE",
       "nodes": [
-        "sync_status_notify_integration_api",
-        "sync_status_kafka",
-        "sync_status_notify_consume_service",
-        "sync_status_third_party_api",
-        "sync_status_portal_notification"
+        "uber_btc_coordinator",
+        "uber_entity_statecharts",
+        "uber_orm_layer",
+        "uber_spanner_storage",
+        "uber_late_action_table"
       ],
-      "relation": "participate_in",
+      "relation": "implement",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "architecture/syncStatusWith3rdParty/index.md"
+      "source_file": "architecture/uber/index.md"
     },
     {
-      "id": "dynamic_component_loading_pattern",
-      "label": "Dynamic Component Loading Pattern",
+      "id": "multi_entity_transactional_lifecycle_systems",
+      "label": "Multi-Entity Transactional Lifecycle Pattern (Uber Trip+Supply, Stripe Ledger, FOQS Queue)",
       "nodes": [
-        "dynamic_loading_results_component",
-        "dynamic_loading_layout_config",
-        "dynamic_loading_result_ball_loader",
-        "dynamic_loading_result_summary_loader",
-        "dynamic_loading_counter_dynamic_market_selections"
-      ],
-      "relation": "form",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "flowchart/dynamicLoading/DynamicLoadindgMechanism.flowchart.md"
-    },
-    {
-      "id": "llm_proxy_cmp_gateway_proxy_upstream_flow",
-      "label": "Gateway Proxy Upstream Flow",
-      "nodes": [
-        "llm_proxy_cmp_diagram_openclaw_gateway",
-        "llm_proxy_cmp_diagram_iclaw_openclaw_proxy",
-        "llm_proxy_cmp_diagram_llm_upstream"
-      ],
-      "relation": "participate_in",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "architecture/ai-integration/llm-proxy-cmp-diagram.svg"
-    },
-    {
-      "id": "llm_proxy_cmp_proxy_auth_header_rewrite",
-      "label": "Proxy Auth Header Rewrite",
-      "nodes": [
-        "llm_proxy_cmp_diagram_strip_incoming_auth_headers",
-        "llm_proxy_cmp_diagram_inject_real_llm_api_key_from_memory",
-        "llm_proxy_cmp_diagram_real_llm_api_key"
-      ],
-      "relation": "form",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "architecture/ai-integration/llm-proxy-cmp-diagram.svg"
-    },
-    {
-      "id": "gogoshop_frontend_clients",
-      "label": "GoGoShop Frontend Clients",
-      "nodes": [
-        "System_Design_v1-Container_user",
-        "System_Design_v1-Container_merchant",
-        "System_Design_v1-Container_shopping_portal",
-        "System_Design_v1-Container_back_office"
-      ],
-      "relation": "participate_in",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "architecture/eCommerceWebSite/System_Design_v1-Container.drawio.png"
-    },
-    {
-      "id": "gogoshop_rest_service_layer",
-      "label": "GoGoShop REST Service Layer",
-      "nodes": [
-        "System_Design_v1-Container_shopping_portal",
-        "System_Design_v1-Container_back_office",
-        "System_Design_v1-Container_user_service",
-        "System_Design_v1-Container_product_service",
-        "System_Design_v1-Container_rest_api"
-      ],
-      "relation": "form",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "architecture/eCommerceWebSite/System_Design_v1-Container.drawio.png"
-    },
-    {
-      "id": "gogoshop_messaging_flow",
-      "label": "GoGoShop Messaging Flow",
-      "nodes": [
-        "System_Design_v1-Container_firebase_cloud_messaging",
-        "System_Design_v1-Container_real_time_message",
-        "System_Design_v1-Container_back_office",
-        "System_Design_v1-Container_product_service",
-        "System_Design_v1-Container_message_queue",
-        "System_Design_v1-Container_pub_sub_message"
-      ],
-      "relation": "participate_in",
-      "confidence": "INFERRED",
-      "confidence_score": 0.8,
-      "source_file": "architecture/eCommerceWebSite/System_Design_v1-Container.drawio.png"
-    },
-    {
-      "id": "gogoshop_customer_purchase_context",
-      "label": "GoGoShop Customer Purchase Context",
-      "nodes": [
-        "system_design_v1_context_user",
-        "system_design_v1_context_shopping_portal",
-        "system_design_v1_context_product",
-        "system_design_v1_context_merchant",
-        "system_design_v1_context_customer_account"
-      ],
-      "relation": "form",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "architecture/eCommerceWebSite/System_Design_v1-Context.drawio.png"
-    },
-    {
-      "id": "gogoshop_merchant_management_context",
-      "label": "GoGoShop Merchant Management Context",
-      "nodes": [
-        "system_design_v1_context_merchant",
-        "system_design_v1_context_back_office",
-        "system_design_v1_context_store",
-        "system_design_v1_context_user",
-        "system_design_v1_context_promotion",
-        "system_design_v1_context_business_report"
+        "uber_entity_statecharts",
+        "survey_stripe_ledger_state_machine",
+        "survey_meta_foqs_priority_queue",
+        "uber_late_action_table"
       ],
       "relation": "form",
       "confidence": "INFERRED",
       "confidence_score": 0.75,
-      "source_file": "architecture/eCommerceWebSite/System_Design_v1-Context.drawio.png"
+      "source_file": "architecture/uber/index.md"
     }
   ]
 }
