@@ -1,6 +1,7 @@
 # Architecture<!-- omit in toc -->
 <!-- table of content -->
 - [Abstract](#abstract)
+- [Popular Product System Designs](#popular-product-system-designs)
 - [C4 Context Diagram of Jenkins and Git Repositories](#c4-context-diagram-of-jenkins-and-git-repositories)
 - [`Draw.io` - eCommerceWebSite System Design v1](#drawio---ecommercewebsite-system-design-v1)
   - [`draw.io` Source](#drawio-source)
@@ -9,6 +10,12 @@
 
 ## Abstract
 > This document provides a detailed overview of the system architecture, emphasizing the use of `mermaid` and `draw.io` for visual representation. 
+
+## Popular Product System Designs
+> These Mermaid-first design packs turn high-signal survey sources into quick architecture reads with explicit evidence boundaries and best-practice takeaways.
+
+- [Design Uber](./uber/) - ride request, trip lifecycle, and live location update paths for a ride-hailing marketplace
+- [Design Netflix](./netflix/) - content preparation, playback startup, and recommendation paths for a streaming platform
 
 ## C4 Context Diagram of Jenkins and Git Repositories
 > The `mermaid` diagrams illustrate the `C4 context diagram` of `Jenkins` and `Git repositories`, showcasing the interactions and relationships between various components. 

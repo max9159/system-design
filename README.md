@@ -12,6 +12,7 @@
     - [📐 draw.io](#-drawio)
   - [Project Structure](#project-structure)
   - [Architecture Diagrams](#architecture-diagrams)
+    - [Popular Product System Designs](#popular-product-system-designs)
     - [🏗️ CI/CD \& DevOps](#️-cicd--devops)
     - [🤖 AI Integration](#-ai-integration)
     - [🛒 E-Commerce Systems](#-e-commerce-systems)
@@ -58,9 +59,11 @@ This repository serves as a practical reference for system design patterns and a
 system-design/
 ├── architecture/          # System architecture diagrams
 │   ├── ai-integration/   # AI integration and LLM proxy designs
-│   ├── jenkins/          # CI/CD pipeline architectures
 │   ├── eCommerceWebSite/ # E-commerce system designs
-│   └── syncStatusWith3rdParty/ # Third-party integration patterns
+│   ├── jenkins/          # CI/CD pipeline architectures
+│   ├── netflix/          # Netflix streaming design pack
+│   ├── syncStatusWith3rdParty/ # Third-party integration patterns
+│   └── uber/             # Uber ride-hailing design pack
 ├── flowchart/            # Process flow diagrams
 │   └── dynamicLoading/   # Frontend component loading patterns
 ├── sdlc/                 # Software development lifecycle diagrams
@@ -70,6 +73,10 @@ system-design/
 ```
 
 ## Architecture Diagrams
+
+### Popular Product System Designs
+- **[Design Uber](./architecture/uber/)** - Ride request, trip lifecycle, and live location update diagrams with source-backed fulfillment and push-delivery boundaries
+- **[Design Netflix](./architecture/netflix/)** - Content preparation, playback startup, and recommendation diagrams for a streaming platform design
 
 ### 🏗️ CI/CD & DevOps
 - **[Jenkins CI/CD Architecture](./architecture/jenkins/)** - C4 context diagram showing Jenkins and Git repositories integration
