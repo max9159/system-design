@@ -1,123 +1,144 @@
-# Design Uber
+# Uber Fulfillment Platform Re-architecture
 
-Uber is a useful ride-hailing system design topic because one user action crosses marketplace search, durable trip state, mobile delivery, and high-frequency location telemetry. This pack starts with the ride path that a reader needs first, then separates the lifecycle and live-update concerns that should not be collapsed into one service.
+This Uber case study is more useful than a generic "request a ride" diagram. The official Fulfillment articles explain why lifecycle-heavy marketplace systems become hard to evolve when one business action must update several entities, emit side effects, survive retries, and keep a consistent view for consumers.
 
-## Product Scope
+## Case-Study Focus
 
-- Rider trip requests, driver supply sessions, offers, acceptances, pickup, in-trip progress, dropoff, cancellation, and receipts.
-- Nearby driver candidate lookup, geospatial indexing, lifecycle orchestration, and real-time rider updates.
-- Durable trip state and mobile update delivery as distinct correctness problems.
-- Pricing, ETA calculation, routing, and payment as adjacent dependencies rather than the core focus of this first pass.
+- Fulfillment entities such as `Trip` and `Supply`, not pricing, routing, or the dispatch algorithm.
+- The previous architecture's availability-first write model and its multi-entity consistency cost.
+- The new programming model built around statecharts, a Business Transaction Coordinator, an ORM layer, Spanner transactions, and durable post-commit work.
+- Technical patterns that transfer to order orchestration, delivery, booking, and other multi-entity lifecycle systems.
 
 ## Read This First
 
-Start with the ride request diagram. It shows why geospatial lookup finds candidates while a trip workflow owns state transitions and offer acceptance.
+Start with the old multi-entity write problem. It explains why Uber's rebuild matters before looking at Spanner or the new framework components.
 
 ## Source Map
 
-The first-pass diagrams are distilled from the official sources collected in [Design Uber](../../survey/design-uber-index.md) and the push-delivery note in [Uber's Next Gen Push Platform on gRPC](../../survey/uber-realtime-push-platform.md).
+The diagrams below distill the official sources collected by [Design Uber](../../survey/design-uber-index.md).
 
 | Source | Used for |
 | --- | --- |
-| [Uber Fulfillment Platform re-architecture](https://www.uber.com/blog/fulfillment-platform-rearchitecture/) | Trip and Supply domain split, lifecycle orchestration, and statechart thinking. |
-| [Building Uber's Fulfillment Platform using Spanner](https://www.uber.com/blog/building-ubers-fulfillment-platform/) | Durable and globally consistent fulfillment state. |
-| [Uber's Next Gen Push Platform on gRPC](https://www.uber.com/us/en/blog/ubers-next-gen-push-platform-on-grpc/) | Persistent mobile streams, delivery acknowledgements, and real-time push responsibilities. |
-| [H3: Uber's Hexagonal Hierarchical Spatial Index](https://www.uber.com/blog/h3/) | Geospatial candidate lookup context. |
+| [Uber Fulfillment Platform re-architecture](https://www.uber.com/blog/fulfillment-platform-rearchitecture/) | Previous architecture problems, Trip and Supply entities, new programming model, LATE, and the application architecture components. |
+| [Building Uber's Fulfillment Platform using Spanner](https://www.uber.com/blog/building-ubers-fulfillment-platform/) | Why consistency became a selection criterion and what Spanner contributes to multi-row, multi-table transactions. |
 
 ## Evidence Boundary
 
 **Verified by the source set**
 
-- Uber models fulfillment around Trip and Supply domains with explicit lifecycle orchestration.
-- Ongoing fulfillment state needs stronger durability and consistency than transient location updates.
-- Uber uses geospatial indexing context for marketplace work and a mobile push platform for live delivery.
+- A driver accepting a trip offer is a multi-entity write: the Trip entity changes and the Supply plan gains trip waypoints.
+- The previous stack used `rt-demand` and `rt-supply` over Cassandra and Redis, Ringpop serialization, and Saga coordination for cross-entity work.
+- Uber moved fulfillment storage to Spanner for transactional consistency, horizontal scalability, and lower operational overhead.
+- The new application model centers on statecharts, a Business Transaction Coordinator, and an ORM layer; post-commit operations and timers are committed to a LATE action table for at-least-once execution.
 
 **Assumptions in these diagrams**
 
-- Service names such as `Ride Request API`, `Matching / Offer Service`, and `Location Stream` are explanatory boundaries, not copied Uber public APIs.
-- Pricing, ETA, routing, fraud checks, and payment are shown only as dependencies where they affect the ride path.
-- The final candidate selection algorithm is left behind the matching boundary because the survey batch does not prove its current internals.
+- The diagrams are educational reconstructions from the public articles, not copies of Uber's internal diagrams or a current service inventory.
+- The examples use the simple UberX `Trip` and `Supply` terms because the official article uses them to explain the platform.
+- RPC endpoints, table names beyond the published LATE action table concept, retries, and observability hooks are intentionally abstracted.
 
-## 1. Ride Request To Trip Start
+## 1. Why The Previous Write Path Became Hard
 
-The request path keeps marketplace search separate from the durable workflow that records an accepted offer and starts the trip.
+One acceptance action touches both demand and supply state. In the previous architecture, application-layer coordination could leave entities temporarily inconsistent between operations and made cross-service debugging harder as flows became more complex.
 
 ```mermaid
 flowchart LR
-    Rider["Rider App"] --> RequestAPI["Ride Request API"]
-    RequestAPI --> Intent["Trip Intent + Pickup/Dropoff"]
-    Intent --> QuoteDeps["Pricing / ETA / Route Dependencies"]
-    Intent --> CandidateLookup["Nearby Supply Lookup"]
-    CandidateLookup --> GeoIndex["Geospatial Index"]
-    GeoIndex --> CandidateLookup
-    CandidateLookup --> Matching["Matching / Offer Service"]
-    Matching --> DriverPush["Driver Offer Delivery"]
-    DriverPush --> Driver["Driver App"]
-    Driver --> Acceptance["Offer Acceptance"]
-    Acceptance --> Lifecycle["Trip Lifecycle Orchestrator"]
-    Lifecycle --> FulfillmentDB[("Durable Fulfillment State")]
-    Lifecycle --> TripStarted["Trip Started"]
-    TripStarted --> RiderPush["Rider Live Update"]
-    RiderPush --> Rider
+    Accept["Driver accepts trip offer"] --> Saga["Saga / RPC coordination"]
+
+    subgraph Demand["rt-demand"]
+        DemandLock["Ringpop owner<br/>serial read-modify-write"]
+        Trip["Trip entity"]
+        DemandStore[("Redis + Cassandra")]
+        DemandLock --> Trip --> DemandStore
+    end
+
+    subgraph Supply["rt-supply"]
+        SupplyLock["Ringpop owner<br/>serial read-modify-write"]
+        Plan["Supply entity<br/>driver plan + waypoints"]
+        SupplyStore[("Redis + Cassandra")]
+        SupplyLock --> Plan --> SupplyStore
+    end
+
+    Saga --> DemandLock
+    Saga --> SupplyLock
+    DemandStore --> Outcome["Logical transaction outcome"]
+    SupplyStore --> Outcome
+    Outcome --> Good["Both entities agree"]
+    Outcome --> Gap["Failure window<br/>mismatch, compensation,<br/>reconciliation"]
 ```
 
-## 2. Trip And Supply Lifecycle
+## 2. What The Rebuild Changes
 
-An explicit lifecycle avoids mixing candidate discovery with state changes that must survive retries, disconnects, and cancellation edges.
+The rebuild is not just a database swap. It moves business lifecycle modeling, multi-entity coordination, transaction abstraction, and post-commit work into explicit platform components. The previous stack favored availability through application sharding and best-effort coordination; the new requirements call out strong consistency for multi-row and multi-table transactions.
 
 ```mermaid
-stateDiagram-v2
-    [*] --> SupplyAvailable
+flowchart LR
+    subgraph Previous["Previous fulfillment stack"]
+        OldAPI["rt-demand / rt-supply"]
+        Ringpop["Ringpop ownership<br/>serial queue + in-memory lock"]
+        Saga["Saga + RPC coordination"]
+        Cache["In-memory cache + Redis"]
+        Cassandra[("MSG / Cassandra")]
+        OldAPI --> Ringpop --> Saga
+        Ringpop --> Cache --> Cassandra
+        Saga --> Cassandra
+    end
 
-    state "Supply session" as Supply {
-        SupplyAvailable --> OfferPending: Offer driver
-        OfferPending --> SupplyAvailable: Reject or expire
-        OfferPending --> DriverAssigned: Accept
-        DriverAssigned --> PickupArrived: Reach pickup
-        PickupArrived --> InTrip: Start trip
-        InTrip --> Completed: Drop off rider
-        DriverAssigned --> Cancelled: Rider or driver cancel
-        PickupArrived --> Cancelled: Cancel before start
-    }
+    subgraph New["New fulfillment platform"]
+        Gateway["Gateway<br/>triggers + queries"]
+        BTC["Business Transaction Coordinator<br/>DAG of entity triggers"]
+        Charts["Entity Statecharts<br/>Trip, Supply, jobs"]
+        ORM["ORM layer<br/>transaction + relationship abstraction"]
+        Spanner[("Spanner<br/>cross-row + cross-table transaction")]
+        LATE[("LATE action table")]
+        Workers["LATE workers<br/>post-commit actions + timers"]
+        Gateway --> BTC --> Charts --> ORM --> Spanner
+        ORM --> LATE --> Workers
+    end
 
-    Completed --> [*]
-    Cancelled --> SupplyAvailable: Rejoin supply
+    Previous -. "consistency and extensibility pressure" .-> New
 ```
 
-## 3. Live Location And Rider Updates
+## 3. Transactional Trigger And Durable Side Effects
 
-Location data can arrive much more often than lifecycle transitions. The live path should stream and fan out observations without making every coordinate update a transactional trip write.
+The new programming model lets a trigger coordinate entity transitions inside one read-write transaction. Side effects that should run after commit, such as notifications or Kafka publication, need a durable handoff instead of being silently coupled to the transaction response path.
 
 ```mermaid
 sequenceDiagram
-    participant Driver as Driver App
-    participant Location as Location Stream
-    participant Supply as Supply View
-    participant Trip as Trip Lifecycle
-    participant Push as Mobile Push Platform
-    participant Rider as Rider App
-    participant Store as Fulfillment State
+    participant Caller as Client or Internal System
+    participant Gateway as Fulfillment Gateway
+    participant BTC as Business Transaction Coordinator
+    participant Trip as Trip Statechart
+    participant Supply as Supply Statechart
+    participant ORM as ORM Layer
+    participant DB as Spanner Transaction
+    participant LATE as LATE Action Table
+    participant Worker as LATE Worker
+    participant SideEffect as Kafka / Notification / Timer
 
-    Driver->>Location: Location update
-    Location->>Supply: Refresh nearby supply view
-    Location->>Push: Publish rider-facing position update
-    Push-->>Rider: Stream live driver position
-    Rider-->>Push: Delivery acknowledgement
-
-    Driver->>Trip: Arrived / start / complete action
-    Trip->>Store: Commit lifecycle transition
-    Trip->>Push: Publish trip state update
-    Push-->>Rider: Stream durable trip status
+    Caller->>Gateway: Trigger business action
+    Gateway->>BTC: Resolve DAG of entity triggers
+    BTC->>Trip: Evaluate trigger and transition
+    BTC->>Supply: Evaluate related trigger and transition
+    Trip->>ORM: Entity update
+    Supply->>ORM: Entity update
+    ORM->>DB: Commit entity writes atomically
+    ORM->>LATE: Commit post-commit actions with transaction
+    DB-->>Gateway: Transaction result
+    Gateway-->>Caller: Consistent business response
+    Worker->>LATE: Scan pending actions
+    Worker->>SideEffect: Execute at least once
 ```
 
-## Best-Practice Takeaways
+## Technical Takeaways
 
-- Keep high-frequency telemetry away from the transactional write path for core trip state.
-- Model trip and supply transitions explicitly before adding pricing, ETA, payment, and notifications.
-- Use geospatial lookup to narrow candidates; make offer acceptance a separate correctness boundary.
-- Treat mobile delivery reliability, acknowledgement, and reconnect behavior as platform concerns instead of embedding them in every domain service.
+- Start by drawing the business transaction boundary. If one user action mutates several lifecycle entities, generic microservice boxes hide the hardest part.
+- State machines help make transitions explicit, but they need a transaction model when multiple entities must change together.
+- A consistency upgrade changes the programming model too: write coordination, data abstraction, and extension points need to become platform concepts.
+- Post-commit effects need a durable handoff if they matter after the transaction commits; "send an event after write" is not enough design detail.
+- Storage selection is workload-specific. Uber selected Spanner around transactional consistency, horizontal scale, and operational overhead for fulfillment, not as a blanket answer for every Uber subsystem.
 
-## Coverage Gaps
+## Follow-Up Depth
 
-- The current source set is stronger on fulfillment, consistency, geospatial context, and push delivery than on pricing and ETA internals.
-- Matching internals are intentionally abstract here; add official sources before turning them into a detailed dispatch algorithm diagram.
+- Add a storage topology page only when the design needs Uber-to-GCP network redundancy, multi-region Spanner placement, failover latency, or cost modeling.
+- Keep H3, real-time mobile push, ETA, and pricing in separate packs. They solve different technical problems than fulfillment write correctness.
