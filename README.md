@@ -11,6 +11,7 @@
     - [🧩 Mermaid](#-mermaid)
     - [📐 draw.io](#-drawio)
   - [Project Structure](#project-structure)
+  - [AI Agent](#ai-agent)
   - [Architecture Diagrams](#architecture-diagrams)
     - [Popular Product System Designs](#popular-product-system-designs)
     - [🏗️ CI/CD \& DevOps](#️-cicd--devops)
@@ -57,6 +58,8 @@ This repository serves as a practical reference for system design patterns and a
 ## Project Structure
 ```
 system-design/
+├── ai-agent/              # AI agent designs and runnable artifacts
+│   └── claude-code-workflows/ # Claude Code dynamic-workflows write-up + workflow scripts
 ├── architecture/          # System architecture diagrams
 │   ├── ai-integration/   # AI integration and LLM proxy designs
 │   ├── eCommerceWebSite/ # E-commerce system designs
@@ -71,6 +74,11 @@ system-design/
 ├── sequenceDiagram/      # Interaction sequence diagrams
 └── LICENSE              # MIT License
 ```
+
+## AI Agent
+Designs and runnable artifacts for building AI agents. See **[`ai-agent/`](./ai-agent/)** for the full index.
+
+- **[Claude Code Dynamic Workflows](./ai-agent/claude-code-workflows/)** - A practical guide to *dynamic workflows* on Claude Code (the orchestration layer that fans out tens to hundreds of sub-agents in one session and verifies its own work), the six reusable patterns, and two runnable workflow scripts — `code-review-fanout.js` and `sdlc-workflow.js`. Includes a [繁體中文版](./ai-agent/claude-code-workflows/claude-code-dynamic-workflows-design.zh-TW.md).
 
 ## Architecture Diagrams
 
@@ -135,6 +143,7 @@ system-design/
 3. **HTML Preview**: Open the provided `.html` files in any web browser
 
 ### Quick Links
+- 🤖 [AI Agent](./ai-agent/)
 - 📁 [Architecture Diagrams](./architecture/)
 - 📊 [Flowcharts](./flowchart/)
 - 🔄 [Sequence Diagrams](./sequenceDiagram/)
