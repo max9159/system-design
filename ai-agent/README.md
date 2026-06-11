@@ -15,3 +15,12 @@ Designing AI agents with **dynamic workflows** on Claude Code — the orchestrat
 - **[`claude-six-workflow-patterns.png`](./claude-code-workflows/claude-six-workflow-patterns.png)** — the six workflow patterns at a glance.
 
 > To use the workflows, copy the `.js` files into a Claude Code workflows dir (`~/.claude/workflows/` for every project, or a repo's own `.claude/workflows/`) and invoke them as `/code-review-fanout` / `/sdlc-workflow`. See §12 of the design doc for details.
+
+### 📊 [`claude-code-statusline/`](./claude-code-statusline/)
+Reproduce a rich, single-line **status bar** at the bottom of every Claude Code session — directory + git branch, model, context-window remaining (with a colored mini-bar), 5h/7d rate-limit remaining, and session cost. Zero dependencies; works on Windows/macOS/Linux.
+
+- **[`claude-code-statusline-setup-guide.md`](./claude-code-statusline/claude-code-statusline-setup-guide.md)** — the main write-up: what each segment shows, how the `statusLine` command hook works, 2-file setup, verification, gotchas, customizing, and a full reference for the stdin JSON Claude Code pipes to the script.
+- **[`statusline.cjs`](./claude-code-statusline/statusline.cjs)** — the runnable status-line script.
+- **[`settings.windows.example.json`](./claude-code-statusline/settings.windows.example.json)** / **[`settings.macos-linux.example.json`](./claude-code-statusline/settings.macos-linux.example.json)** — the minimal `statusLine` setting to merge into your config dir's `settings.json`, one per OS.
+
+> Copy `statusline.cjs` into your Claude Code config dir (`~/.claude/`, or a custom `CLAUDE_CONFIG_DIR`), add the `statusLine` key from `settings.example.json` pointing at it, and restart. See the setup guide for details.
