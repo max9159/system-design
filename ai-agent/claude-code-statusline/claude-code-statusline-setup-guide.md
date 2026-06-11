@@ -27,7 +27,7 @@ Shows a one-line status bar at the bottom of every Claude Code session:
 ![Claude Code custom status line preview](./cc-sl-preivew.png)
 
 ```
-my-project | feat/my-branch │ Fable 5 │  ━━━━━━┄┄┄┄ 63% │  5h:88% │  7d:15% │  $1.23
+my-project | feat/my-branch │ Fable 5 (medium) │ 🪟 ctx:━━━━━━┄┄┄┄ 63% │ ⏰ 5h:88% │ 📆 7d:15% │ 💸 $1.23
 ```
 
 Segments, separated by a dim `│`:
@@ -36,11 +36,12 @@ Segments, separated by a dim `│`:
 |---------|--------|-------|-------------|
 | `my-project` | Basename of the current working directory | plain | never |
 | `feat/my-branch` | Current git branch (`git rev-parse --abbrev-ref HEAD`) | plain | not a git repo |
-| `Fable 5` | Model display name | bold magenta | not provided |
-| ` ━━━━━━┄┄┄┄ 63%` | Context window **remaining** % with a 10-char bar | colored by remaining | not provided |
-| ` 5h:88%` | 5-hour rate limit **remaining** % | colored by remaining | not provided |
-| ` 7d:15%` | 7-day rate limit **remaining** % | colored by remaining | not provided |
-| ` $1.23` | Session cost in USD | dim | zero / not provided |
+| `Fable 5` | Model display name | colored by model | not provided |
+| `(medium)` | Reasoning effort level (`effort.level`) | dim, after model | not provided |
+| `🪟 ctx:━━━━━━┄┄┄┄ 63%` | Context window **remaining** % with a 10-char bar | colored by remaining | not provided |
+| `⏰ 5h:88%` | 5-hour rate limit **remaining** % | colored by remaining | not provided |
+| `📆 7d:15%` | 7-day rate limit **remaining** % | colored by remaining | not provided |
+| `💸 $1.23` | Session cost in USD | dim | zero / not provided |
 
 Color thresholds (applied to remaining %): **green ≥ 50**, **yellow 21–49**, **red ≤ 20**.
 
@@ -56,7 +57,7 @@ Node script ([`statusline.cjs`](./statusline.cjs)) as that command.
 - **Claude Code** installed
 - **Node.js** on PATH (`node --version` to check)
 - **git** on PATH (optional — branch is simply omitted without it)
-- **Nerd Font** in your terminal (optional — for the chip//dollar icons; see Customizing)
+- A terminal/font that renders **emoji** (🪟 ⏰ 📆 💸; swap the `ICON_*` constants for plain text or Nerd Font glyphs otherwise — see Customizing)
 
 No other dependencies (no `jq`, no bash, works on Windows/macOS/Linux).
 
@@ -124,20 +125,20 @@ Feed the script a sample payload and check the output.
 **Windows (cmd-style redirection avoids a PowerShell BOM issue):**
 
 ```powershell
-[System.IO.File]::WriteAllText("$env:TEMP\sl-test.json", '{"workspace":{"current_dir":"D:/some/project"},"model":{"display_name":"Fable 5"},"context_window":{"remaining_percentage":63.2},"rate_limits":{"five_hour":{"used_percentage":12},"seven_day":{"used_percentage":85}},"cost":{"total_cost_usd":1.2345}}')
+[System.IO.File]::WriteAllText("$env:TEMP\sl-test.json", '{"workspace":{"current_dir":"D:/some/project"},"model":{"display_name":"Fable 5"},"effort":{"level":"medium"},"context_window":{"remaining_percentage":63.2},"rate_limits":{"five_hour":{"used_percentage":12},"seven_day":{"used_percentage":85}},"cost":{"total_cost_usd":1.2345}}')
 cmd /c "node C:\Users\<you>\.claude\statusline.cjs < %TEMP%\sl-test.json"
 ```
 
 **macOS/Linux:**
 
 ```bash
-echo '{"workspace":{"current_dir":"/some/project"},"model":{"display_name":"Fable 5"},"context_window":{"remaining_percentage":63.2},"rate_limits":{"five_hour":{"used_percentage":12},"seven_day":{"used_percentage":85}},"cost":{"total_cost_usd":1.2345}}' | node ~/.claude/statusline.cjs
+echo '{"workspace":{"current_dir":"/some/project"},"model":{"display_name":"Fable 5"},"effort":{"level":"medium"},"context_window":{"remaining_percentage":63.2},"rate_limits":{"five_hour":{"used_percentage":12},"seven_day":{"used_percentage":85}},"cost":{"total_cost_usd":1.2345}}' | node ~/.claude/statusline.cjs
 ```
 
 Expected output (with ANSI colors):
 
 ```
-project | <branch-if-git-repo> │ Fable 5 │  ━━━━━━┄┄┄┄ 63% │  5h:88% │  7d:15% │  $1.23
+project | <branch-if-git-repo> │ Fable 5 (medium) │ 🪟 ctx:━━━━━━┄┄┄┄ 63% │ ⏰ 5h:88% │ 📆 7d:15% │ 💸 $1.23
 ```
 
 A minimal payload (no rate limits / cost / context) degrades gracefully, e.g.
@@ -165,8 +166,9 @@ just `project │ Fable 5`.
 
 Edit `statusline.cjs` and restart Claude Code:
 
-- **No Nerd Font?** Replace the `ICON_*` constants with plain text, e.g.
-  `ICON_CTX = 'ctx'`, `ICON_CLOCK = '⏰'`, `ICON_COST = '$'`.
+- **Different icons?** Replace the `ICON_*` constants (`ICON_CTX` 🪟, `ICON_CLOCK` ⏰,
+  `ICON_CALENDAR` 📆, `ICON_COST` 💸) with other emoji, plain text (e.g. `'$'`),
+  or Nerd Font glyphs if your terminal font supports them.
 - **Bar width:** change the `width = 10` default in `miniBar`.
 - **Color thresholds:** adjust the `<= 20` / `<= 49` cutoffs in `colorByRemain`.
 - **Full path instead of folder name:** replace `require('path').basename(cwd)` with `cwd`.

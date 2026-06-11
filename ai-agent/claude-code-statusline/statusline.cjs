@@ -1,16 +1,17 @@
 #!/usr/bin/env node
 // Claude Code status line:
-// <dir> | <branch> │ <Model> │ <ctx bar+%> │ 5h:% │ 7d:% │ $cost
-// Colors: green ≥50% remaining, yellow 21-49%, red ≤20%. Icons need a Nerd Font.
+// <dir> | <branch> │ <Model (effort)> │ ctx:<bar+%> │ 5h:% │ 7d:% │ $cost
+// Colors: green ≥50% remaining, yellow 21-49%, red ≤20%. Icons are plain emoji.
 let raw = '';
 process.stdin.on('data', (c) => (raw += c));
 process.stdin.on('end', () => {
   let input = {};
   try { input = JSON.parse(raw.replace(/^﻿/, '')); } catch {}
 
-  const ICON_CTX = '';   // chip
-  const ICON_CLOCK = ''; // clock
-  const ICON_COST = '';  // dollar
+  const ICON_CTX = '🪟';   // window
+  const ICON_CLOCK = '⏰'; // clock
+  const ICON_CALENDAR = '📆'; // calendar
+  const ICON_COST = '💸';  // dollar
   const RESET = '\x1b[0m';
   const DIM = '\x1b[2m';
   const SEP = `${DIM} │ ${RESET}`;
@@ -46,7 +47,11 @@ process.stdin.on('end', () => {
     return '\x1b[1;35m';
   };
   const model = input.model && input.model.display_name;
-  if (model) parts.push(`${colorByModel(model)}${model}${RESET}`);
+  if (model) {
+    const effort = input.effort && input.effort.level;
+    const suffix = effort ? ` ${DIM}(${effort})${RESET}` : '';
+    parts.push(`${colorByModel(model)}${model}${RESET}${suffix}`);
+  }
 
   // Context remaining (bar + %)
   const ctx = input.context_window || {};
@@ -56,16 +61,16 @@ process.stdin.on('end', () => {
   }
   if (typeof remain === 'number') {
     const val = Math.round(remain);
-    parts.push(`${colorByRemain(val)}${ICON_CTX} ${miniBar(val)} ${val}%${RESET}`);
+    parts.push(`${colorByRemain(val)}${ICON_CTX} ctx:${miniBar(val)} ${val}%${RESET}`);
   }
 
   // 5h / 7d rate limits (shown as % remaining)
   const rl = input.rate_limits || {};
-  for (const [key, label] of [['five_hour', '5h'], ['seven_day', '7d']]) {
+  for (const [key, label, icon] of [['five_hour', '5h', ICON_CLOCK], ['seven_day', '7d', ICON_CALENDAR]]) {
     const used = rl[key] && rl[key].used_percentage;
     if (typeof used === 'number') {
       const val = 100 - Math.round(used);
-      parts.push(`${colorByRemain(val)}${ICON_CLOCK} ${label}:${val}%${RESET}`);
+      parts.push(`${colorByRemain(val)}${icon} ${label}:${val}%${RESET}`);
     }
   }
 
