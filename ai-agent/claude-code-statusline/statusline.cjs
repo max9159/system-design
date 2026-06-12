@@ -9,7 +9,7 @@ process.stdin.on('end', () => {
   try { input = JSON.parse(raw.replace(/^﻿/, '')); } catch {}
 
   const ICON_CTX = '🪟';   // window
-  const ICON_CLOCK = '⏰'; // clock
+  const ICON_CLOCK = '🕓'; // clock
   const ICON_CALENDAR = '📆'; // calendar
   const ICON_COST = '💸';  // dollar
   const RESET = '\x1b[0m';
@@ -64,13 +64,24 @@ process.stdin.on('end', () => {
     parts.push(`${colorByRemain(val)}${ICON_CTX} ctx:${miniBar(val)} ${val}%${RESET}`);
   }
 
-  // 5h / 7d rate limits (shown as % remaining)
+  // 5h / 7d rate limits (shown as % remaining + reset time)
+  const fmtReset = (epoch, withDay) => {
+    const d = new Date(epoch * 1000);
+    if (isNaN(d)) return '';
+    const hm = d.toTimeString().slice(0, 5);
+    if (!withDay) return hm;
+    const day = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][d.getDay()];
+    return `${day} ${hm}`;
+  };
   const rl = input.rate_limits || {};
-  for (const [key, label, icon] of [['five_hour', '5h', ICON_CLOCK], ['seven_day', '7d', ICON_CALENDAR]]) {
+  for (const [key, label, icon, withDay] of [['five_hour', '5h', ICON_CLOCK, false], ['seven_day', '7d', ICON_CALENDAR, true]]) {
     const used = rl[key] && rl[key].used_percentage;
     if (typeof used === 'number') {
       const val = 100 - Math.round(used);
-      parts.push(`${colorByRemain(val)}${icon} ${label}:${val}%${RESET}`);
+      const resetsAt = rl[key].resets_at;
+      const reset = typeof resetsAt === 'number' ? fmtReset(resetsAt, withDay) : '';
+      const suffix = reset ? `${DIM} ↻${reset}${RESET}` : '';
+      parts.push(`${colorByRemain(val)}${icon} ${label}:${val}%${RESET}${suffix}`);
     }
   }
 
