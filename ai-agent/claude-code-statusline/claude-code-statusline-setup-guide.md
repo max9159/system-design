@@ -27,7 +27,7 @@ Shows a one-line status bar at the bottom of every Claude Code session:
 ![Claude Code custom status line preview](./cc-sl-preivew.png)
 
 ```
-my-project | feat/my-branch │ Fable 5 (medium) │ 🪟 ctx:━━━━━━┄┄┄┄ 63% │ ⏰ 5h:88% │ 📆 7d:15% │ 💸 $1.23
+my-project | feat/my-branch │ Fable 5 (medium) │ 🪟 ctx:━━━━━━┄┄┄┄ 63% │ 🕓 5h:88% ↻14:30 │ 📆 7d:15% ↻Mon 14:30 │ 💸 $1.23
 ```
 
 Segments, separated by a dim `│`:
@@ -39,11 +39,13 @@ Segments, separated by a dim `│`:
 | `Fable 5` | Model display name | colored by model | not provided |
 | `(medium)` | Reasoning effort level (`effort.level`) | dim, after model | not provided |
 | `🪟 ctx:━━━━━━┄┄┄┄ 63%` | Context window **remaining** % with a 10-char bar | colored by remaining | not provided |
-| `⏰ 5h:88%` | 5-hour rate limit **remaining** % | colored by remaining | not provided |
-| `📆 7d:15%` | 7-day rate limit **remaining** % | colored by remaining | not provided |
+| `🕓 5h:88% ↻14:30` | 5-hour rate limit **remaining** %, plus reset time (`resets_at`) | colored by remaining; reset is dim | rate limit not provided (reset omitted if no `resets_at`) |
+| `📆 7d:15% ↻Mon 14:30` | 7-day rate limit **remaining** %, plus reset weekday + time | colored by remaining; reset is dim | rate limit not provided (reset omitted if no `resets_at`) |
 | `💸 $1.23` | Session cost in USD | dim | zero / not provided |
 
 Color thresholds (applied to remaining %): **green ≥ 50**, **yellow 21–49**, **red ≤ 20**.
+
+The `↻` reset times come from each window's `resets_at` (Unix epoch) and are rendered in **local time** — 5h shows `HH:MM`, 7d prefixes the weekday (`Mon HH:MM`). The suffix is omitted when `resets_at` is absent.
 
 ## How it works
 
@@ -57,7 +59,7 @@ Node script ([`statusline.cjs`](./statusline.cjs)) as that command.
 - **Claude Code** installed
 - **Node.js** on PATH (`node --version` to check)
 - **git** on PATH (optional — branch is simply omitted without it)
-- A terminal/font that renders **emoji** (🪟 ⏰ 📆 💸; swap the `ICON_*` constants for plain text or Nerd Font glyphs otherwise — see Customizing)
+- A terminal/font that renders **emoji** (🪟 🕓 📆 💸; swap the `ICON_*` constants for plain text or Nerd Font glyphs otherwise — see Customizing)
 
 No other dependencies (no `jq`, no bash, works on Windows/macOS/Linux).
 
@@ -138,11 +140,13 @@ echo '{"workspace":{"current_dir":"/some/project"},"model":{"display_name":"Fabl
 Expected output (with ANSI colors):
 
 ```
-project | <branch-if-git-repo> │ Fable 5 (medium) │ 🪟 ctx:━━━━━━┄┄┄┄ 63% │ ⏰ 5h:88% │ 📆 7d:15% │ 💸 $1.23
+project | <branch-if-git-repo> │ Fable 5 (medium) │ 🪟 ctx:━━━━━━┄┄┄┄ 63% │ 🕓 5h:88% │ 📆 7d:15% │ 💸 $1.23
 ```
 
-A minimal payload (no rate limits / cost / context) degrades gracefully, e.g.
-just `project │ Fable 5`.
+The sample payload omits `resets_at`, so no `↻` reset time shows; add
+`"resets_at":<epoch>` inside `five_hour` / `seven_day` to see it (rendered in
+your local timezone). A minimal payload (no rate limits / cost / context)
+degrades gracefully, e.g. just `project │ Fable 5`.
 
 ## Gotchas learned during setup
 
@@ -166,9 +170,10 @@ just `project │ Fable 5`.
 
 Edit `statusline.cjs` and restart Claude Code:
 
-- **Different icons?** Replace the `ICON_*` constants (`ICON_CTX` 🪟, `ICON_CLOCK` ⏰,
+- **Different icons?** Replace the `ICON_*` constants (`ICON_CTX` 🪟, `ICON_CLOCK` 🕓,
   `ICON_CALENDAR` 📆, `ICON_COST` 💸) with other emoji, plain text (e.g. `'$'`),
   or Nerd Font glyphs if your terminal font supports them.
+- **Reset-time format:** edit `fmtReset` in `statusline.cjs` — e.g. drop the weekday, switch to 24h/12h, or change the `↻` marker.
 - **Bar width:** change the `width = 10` default in `miniBar`.
 - **Color thresholds:** adjust the `<= 20` / `<= 49` cutoffs in `colorByRemain`.
 - **Full path instead of folder name:** replace `require('path').basename(cwd)` with `cwd`.
