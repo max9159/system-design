@@ -13,6 +13,7 @@
   - [Project Structure](#project-structure)
   - [AI Agent](#ai-agent)
     - [Claude Code Dynamic Workflows](#claude-code-dynamic-workflows)
+    - [Loop Engineering](#loop-engineering)
     - [Claude Code Custom Status Line](#claude-code-custom-status-line)
   - [Architecture Diagrams](#architecture-diagrams)
     - [Popular Product System Designs](#popular-product-system-designs)
@@ -62,6 +63,7 @@ This repository serves as a practical reference for system design patterns and a
 system-design/
 ├── ai-agent/              # AI agent designs and runnable artifacts
 │   ├── claude-code-workflows/ # Claude Code dynamic-workflows write-up + workflow scripts
+│   ├── loop-engineering/  # Bounded gate-and-loop-back in a gated SDLC workflow
 │   └── claude-code-statusline/ # Claude Code custom status-line setup guide + script
 ├── architecture/          # System architecture diagrams
 │   ├── ai-integration/   # AI integration and LLM proxy designs
@@ -83,6 +85,9 @@ Designs and runnable artifacts for building AI agents. See **[`ai-agent/`](./ai-
 
 ### Claude Code Dynamic Workflows
 - **[Claude Code Dynamic Workflows](./ai-agent/claude-code-workflows/)** - A practical guide to *dynamic workflows* on Claude Code (the orchestration layer that fans out tens to hundreds of sub-agents in one session and verifies its own work), the six reusable patterns, and two runnable workflow scripts — `code-review-fanout.js` and `sdlc-workflow.js`. Includes a [繁體中文版](./ai-agent/claude-code-workflows/claude-code-dynamic-workflows-design.zh-TW.md).
+
+### Loop Engineering
+- **[Loop Engineering](./ai-agent/loop-engineering/)** - How a gated SDLC workflow loops a failed review gate back to its producer, bounded so it always terminates — the *agentic loop* / *evaluator-optimizer* pattern with a line-linked walkthrough of `sdlc-workflow.js` and a deep-research-verified references section (Anthropic, OpenAI/LangChain, ReAct/Self-Refine/Reflexion).
 
 ### Claude Code Custom Status Line
 - **[Claude Code Custom Status Line](./ai-agent/claude-code-statusline/)** - A guide to reproduce a rich single-line status bar (directory + branch, model, context-window remaining, 5h/7d rate limits, session cost) with a zero-dependency. 
