@@ -16,6 +16,11 @@ Designing AI agents with **dynamic workflows** on Claude Code — the orchestrat
 
 > To use the workflows, copy the `.js` files into a Claude Code workflows dir (`~/.claude/workflows/` for every project, or a repo's own `.claude/workflows/`) and invoke them as `/code-review-fanout` / `/sdlc-workflow`. See §12 of the design doc for details.
 
+### 🔁 [`loop-engineering/`](./loop-engineering/)
+Worked example B from the dynamic-workflows doc, extracted and reframed around **loop engineering** — making an agent loop safe and convergent (progress each round + explicit stop condition + hard cap).
+
+- **[`loop-engineering/README.md`](./loop-engineering/README.md)** — the bounded **gate-and-loop-back** shape (a failed review gate loops findings back to its producer, capped so it always terminates), how it differs from *loop-until-dry*, the loop invariants among the SDLC design principles, and a convergence checklist.
+
 ### 📊 [`claude-code-statusline/`](./claude-code-statusline/)
 Reproduce a rich, single-line **status bar** at the bottom of every Claude Code session — directory + git branch, model, context-window remaining (with a colored mini-bar), 5h/7d rate-limit remaining, and session cost. Zero dependencies; works on Windows/macOS/Linux.
 
