@@ -139,7 +139,7 @@ e.g.
 ## SDLC
 
 ### 🌿 Git Flow
-- **[Git Flow in Real World](./sdlc/git-flow-in-real-world/git-flow-graph.md)** - Mermaid git graph showing branch promotion from `dev` to `qat`, `uat`, and `prod`, plus production hotfix sync-back flow
+- **[Git Flow in Real World](./sdlc/git-flow-in-real-world/)** - Mermaid git graph showing branch promotion from `dev` to `qat`, `uat`, and `prod`, plus production hotfix sync-back flow
 
 ## Getting Started
 

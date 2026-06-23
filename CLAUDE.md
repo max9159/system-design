@@ -8,7 +8,7 @@ A documentation-only collection of system design references. There is no applica
 
 ## Repository layout
 
-- `architecture/` — real-world architecture case studies and C4-model designs, one subdirectory per system (e.g. `netflix/`, `uber/`, `eCommerceWebSite/`, `jenkins/`, `ai-integration/`). Entry point is usually `index.md`.
+- `architecture/` — real-world architecture case studies and C4-model designs, one subdirectory per system (e.g. `netflix/`, `uber/`, `eCommerceWebSite/`, `jenkins/`, `ai-integration/`). Entry point is `README.md` so GitHub renders it as the directory preview.
 - `survey/` — deep-dive write-ups of published engineering-blog architectures (e.g. `stripe-ledger-money-movement.md`, `github-code-search.md`) and `design-<product>-index.md` topic indexes. Each file starts with YAML frontmatter: `title`, `source`, `source_type`, `published`, `reference_urls`, `system_design_category`, `tags`.
 - `flowchart/` — Mermaid flowcharts, named `<Name>.flowchart.md` (or `.graph.md` for state graphs).
 - `sequenceDiagram/` — Mermaid sequence diagrams, named `<Name>.sequenceDiagram.md`.
@@ -20,6 +20,6 @@ A documentation-only collection of system design references. There is no applica
 ## Conventions
 
 - The root `README.md` is a curated table of contents. When adding a new diagram or write-up, add a link in the matching README section and update the section README (`architecture/README.md`, `flowchart/README.md`, etc.) if one exists.
-- Follow existing file-naming patterns: diagrams carry their type in the filename (`.flowchart.md`, `.sequenceDiagram.md`), architecture case studies live in a named subdirectory with an `index.md`.
+- Follow existing file-naming patterns: diagrams carry their type in the filename (`.flowchart.md`, `.sequenceDiagram.md`), architecture case studies live in a named subdirectory with a `README.md` entry point.
 - New `survey/` documents must include the YAML frontmatter block used by the existing files.
 - Bilingual docs exist in `ai-agent/` (`.zh-TW.md` suffix for Traditional Chinese); if you update one language version of a paired doc, update or flag the other.

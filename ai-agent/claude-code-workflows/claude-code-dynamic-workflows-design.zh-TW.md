@@ -7,7 +7,7 @@
 
 資料來源：[*A harness for every task: dynamic workflows in Claude Code*](https://claude.com/blog/a-harness-for-every-task-dynamic-workflows-in-claude-code)、UltraCode 操作講解，以及兩支正式的工作流 script（`dev-pipeline`、`code-review-fanout`）。
 
-> 英文版：[`claude-code-dynamic-workflows-design.md`](./claude-code-dynamic-workflows-design.md)
+> 英文版：[`README.md`](./README.md)
 
 - [1. 問題所在：單一 context window 對大型任務是糟糕的 harness](#1-問題所在單一-context-window-對大型任務是糟糕的-harness)
 - [2. 協調 agent 的三種方式 —— 以及工作流的差異](#2-協調-agent-的三種方式--以及工作流的差異)
