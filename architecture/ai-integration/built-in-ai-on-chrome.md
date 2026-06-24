@@ -1,6 +1,17 @@
+<!-- omit in toc -->
 # XPrompt System Design Architecture
+> [XPrompt](https://xprompt.app/) is a multi-LLM orchestration platform that allows users to prompt multiple AI models simultaneously, synthesize their responses, and leverage local Chrome AI for prompt enhancement.
 
-XPrompt(https://xprompt.app/) is a multi-LLM orchestration platform that allows users to prompt multiple AI models simultaneously, synthesize their responses, and leverage local Chrome AI for prompt enhancement.
+<!-- omit in toc -->
+## 📋 Table of Contents
+
+- [1. System Context (C4 Layer 1)](#1-system-context-c4-layer-1)
+- [2. Integrated Module Architecture](#2-integrated-module-architecture)
+- [3. Core Functions \& Flow Charts](#3-core-functions--flow-charts)
+  - [3.1 Multi-LLM Parallel Submission](#31-multi-llm-parallel-submission)
+  - [3.2 Response Synthesis (Conclusion)](#32-response-synthesis-conclusion)
+  - [3.3 Local AI Prompt Enhancement](#33-local-ai-prompt-enhancement)
+  - [3.4 Dynamic Re-scraping](#34-dynamic-re-scraping)
 
 ## 1. System Context (C4 Layer 1)
 

@@ -1,6 +1,19 @@
+<!-- omit in toc -->
 # Uber Fulfillment Platform Re-architecture
+> This Uber case study is more useful than a generic "request a ride" diagram. The official Fulfillment articles explain why lifecycle-heavy marketplace systems become hard to evolve when one business action must update several entities, emit side effects, survive retries, and keep a consistent view for consumers.
 
-This Uber case study is more useful than a generic "request a ride" diagram. The official Fulfillment articles explain why lifecycle-heavy marketplace systems become hard to evolve when one business action must update several entities, emit side effects, survive retries, and keep a consistent view for consumers.
+<!-- omit in toc -->
+## 📋 Table of Contents
+
+- [Case-Study Focus](#case-study-focus)
+- [Read This First](#read-this-first)
+- [Source Map](#source-map)
+- [Evidence Boundary](#evidence-boundary)
+- [1. Why The Previous Write Path Became Hard](#1-why-the-previous-write-path-became-hard)
+- [2. What The Rebuild Changes](#2-what-the-rebuild-changes)
+- [3. Transactional Trigger And Durable Side Effects](#3-transactional-trigger-and-durable-side-effects)
+- [Technical Takeaways](#technical-takeaways)
+- [Follow-Up Depth](#follow-up-depth)
 
 ## Case-Study Focus
 

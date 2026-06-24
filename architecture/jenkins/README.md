@@ -1,3 +1,6 @@
+# Jenkins CI/CD & Git Repositories — C4 Context Diagram
+> A C4 context diagram showing how Jenkins CI/CD jobs interact with Git repositories — pulling sources and pushing generated DB packages and deployment guides across the UAT and PROD environments.
+
 ```mermaid
 C4Context
     title Component Diagram of Jenkins and Git Repositories

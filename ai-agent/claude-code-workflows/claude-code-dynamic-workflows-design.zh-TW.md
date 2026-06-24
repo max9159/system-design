@@ -1,13 +1,9 @@
 <!-- omit in toc -->
 # 用動態工作流（Dynamic Workflows）在 Claude Code 上設計 AI Agent
-
 > **一份實務導向的「動態工作流」入門 —— 這是讓 Claude Code 能即時為手上任務量身打造 harness、在單一 session 內擴散（fan out）數十到數百個 sub-agent、並在交回結果前先驗證自己工作的協調層。**
 
-本文說明動態工作流*是什麼*、*為何存在*、script API *如何運作*、**六種可重用模式**，以及一組取自正式工作流的**標註 JavaScript 範例**。對象是在 Claude Code 上構建多 agent 系統的工程師。
-
-資料來源：[*A harness for every task: dynamic workflows in Claude Code*](https://claude.com/blog/a-harness-for-every-task-dynamic-workflows-in-claude-code)、UltraCode 操作講解，以及兩支正式的工作流 script（`dev-pipeline`、`code-review-fanout`）。
-
-> 英文版：[`README.md`](./README.md)
+<!-- omit in toc -->
+## 📋 Table of Contents
 
 - [1. 問題所在：單一 context window 對大型任務是糟糕的 harness](#1-問題所在單一-context-window-對大型任務是糟糕的-harness)
 - [2. 協調 agent 的三種方式 —— 以及工作流的差異](#2-協調-agent-的三種方式--以及工作流的差異)
@@ -32,8 +28,14 @@
 - [11. 設計自己工作流的檢查清單](#11-設計自己工作流的檢查清單)
 - [12. 如何執行](#12-如何執行)
   - [一句話總結](#一句話總結)
+
 ---
 
+本文說明動態工作流*是什麼*、*為何存在*、script API *如何運作*、**六種可重用模式**，以及一組取自正式工作流的**標註 JavaScript 範例**。對象是在 Claude Code 上構建多 agent 系統的工程師。
+
+資料來源：[*A harness for every task: dynamic workflows in Claude Code*](https://claude.com/blog/a-harness-for-every-task-dynamic-workflows-in-claude-code)、UltraCode 操作講解，以及兩支正式的工作流 script（`dev-pipeline`、`code-review-fanout`）。
+
+> 英文版：[`README.md`](./README.md)
 
 ## 1. 問題所在：單一 context window 對大型任務是糟糕的 harness
 

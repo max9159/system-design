@@ -1,5 +1,9 @@
+<!-- omit in toc -->
+# System Design v1
+> A frontend-perspective proposal to re-architect a monolithic e-commerce platform into microservices — current-system limitations, proposed frontend/backend/auth changes, container-level (C4) flows, and the trade-offs of each approach.
 
-# System Design v1<!-- omit from toc -->
+<!-- omit in toc -->
+## 📋 Table of Contents
 
 - [1. Analysis of the existing system and its limitations.](#1-analysis-of-the-existing-system-and-its-limitations)
   - [Scalability](#scalability)

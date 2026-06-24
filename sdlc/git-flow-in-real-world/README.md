@@ -1,6 +1,6 @@
-### Git Flow in Real World
-- Normal: from `dev` > `qat` > `uat` > `prod` branch
-- Hotfix: create branch from `prod`, name as `prd_{date}` branch and also sync back to `dev` branch
+# Git Flow in Real World
+> A branching and deployment strategy for real-world git flow — normal releases promote `dev` → `qat` → `uat` → `prod`, while a hotfix branches from `prod` as `prd_{date}` and syncs back to `dev`.
+
 ```mermaid
 %%{init: { 'logLevel': 'debug', 'theme': 'base', 'gitGraph': {'rotateCommitLabel': false,'showBranches': true, 'showCommitLabel':true,'mainBranchName': 'dev'}} }%%
 gitGraph

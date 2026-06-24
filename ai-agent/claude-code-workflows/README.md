@@ -1,13 +1,9 @@
 <!-- omit in toc -->
 # Designing AI Agents with Dynamic Workflows on Claude Code
-
 > **A practical introduction to *dynamic workflows* — the orchestration layer that lets Claude Code write its own harness on the fly, fan out tens to hundreds of sub-agents in a single session, and verify its own work before handing it back.**
 
-This doc explains *what* dynamic workflows are, *why* they exist, *how* the script API works, the **six reusable patterns**, and a set of **annotated JavaScript examples** drawn from production workflows. It is written for engineers designing multi-agent systems on top of Claude Code.
-
-Sources: [*A harness for every task: dynamic workflows in Claude Code*](https://claude.com/blog/a-harness-for-every-task-dynamic-workflows-in-claude-code), the UltraCode walkthrough, and two real workflow scripts (`dev-pipeline`, `code-review-fanout`).
-
-> 中文版（繁體）：[`claude-code-dynamic-workflows-design.zh-TW.md`](./claude-code-dynamic-workflows-design.zh-TW.md)
+<!-- omit in toc -->
+## 📋 Table of Contents
 
 - [1. The problem: one context window is a bad harness for big tasks](#1-the-problem-one-context-window-is-a-bad-harness-for-big-tasks)
 - [2. Three ways to coordinate agents — and how workflows differ](#2-three-ways-to-coordinate-agents--and-how-workflows-differ)
@@ -34,6 +30,12 @@ Sources: [*A harness for every task: dynamic workflows in Claude Code*](https://
   - [TL;DR](#tldr)
 
 ---
+
+This doc explains *what* dynamic workflows are, *why* they exist, *how* the script API works, the **six reusable patterns**, and a set of **annotated JavaScript examples** drawn from production workflows. It is written for engineers designing multi-agent systems on top of Claude Code.
+
+Sources: [*A harness for every task: dynamic workflows in Claude Code*](https://claude.com/blog/a-harness-for-every-task-dynamic-workflows-in-claude-code), the UltraCode walkthrough, and two real workflow scripts (`dev-pipeline`, `code-review-fanout`).
+
+> 中文版（繁體）：[`claude-code-dynamic-workflows-design.zh-TW.md`](./claude-code-dynamic-workflows-design.zh-TW.md)
 
 ## 1. The problem: one context window is a bad harness for big tasks
 

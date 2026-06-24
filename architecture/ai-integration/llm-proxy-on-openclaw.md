@@ -1,6 +1,11 @@
+<!-- omit in toc -->
 # iclaw-openclaw-proxy
-
 > **The per-instance runtime companion for [OpenClaw](https://github.com/openclaw/openclaw) AI agents on the [iClawAgent](https://github.com/iClawAgent) platform.**
+
+<!-- omit in toc -->
+## 📋 Table of Contents
+
+- [Architecture](#architecture)
 
 `iclaw-openclaw-proxy` (internally called the *sidecar*) is a lightweight Bun HTTP server that runs co-located with an OpenClaw gateway process — either in the same  Docker container. It sits between the outside world and OpenClaw and handles three distinct responsibilities:
 

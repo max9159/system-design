@@ -1,6 +1,19 @@
+<!-- omit in toc -->
 # Netflix Video Processing Pipeline Rebuild
+> This Netflix case study is most useful as a video-platform architecture lesson. The official pipeline articles explain why a long-lived media pipeline outgrows a bundled platform when new codecs, studio workflows, quality analysis, and service-specific reliability needs all evolve at different speeds.
 
-This Netflix case study is most useful as a video-platform architecture lesson. The official pipeline articles explain why a long-lived media pipeline outgrows a bundled platform when new codecs, studio workflows, quality analysis, and service-specific reliability needs all evolve at different speeds.
+<!-- omit in toc -->
+## 📋 Table of Contents
+
+- [Case-Study Focus](#case-study-focus)
+- [Read This First](#read-this-first)
+- [Source Map](#source-map)
+- [Evidence Boundary](#evidence-boundary)
+- [1. Why The Old Pipeline Needed New Boundaries](#1-why-the-old-pipeline-needed-new-boundaries)
+- [2. Cosmos Video Service Topology](#2-cosmos-video-service-topology)
+- [3. VES Hides Distributed Encoding Complexity](#3-ves-hides-distributed-encoding-complexity)
+- [Technical Takeaways](#technical-takeaways)
+- [Follow-Up Depth](#follow-up-depth)
 
 ## Case-Study Focus
 

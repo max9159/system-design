@@ -1,6 +1,14 @@
+<!-- omit in toc -->
 # AI Agent
+> Notes, designs, and runnable artifacts for building AI agents.
 
-Notes, designs, and runnable artifacts for building AI agents.
+<!-- omit in toc -->
+## 📋 Table of Contents
+
+- [Contents](#contents)
+  - [🧩 `claude-code-workflows/`](#-claude-code-workflows)
+  - [🔁 `loop-engineering/`](#-loop-engineering)
+  - [📊 `claude-code-statusline/`](#-claude-code-statusline)
 
 ## Contents
 

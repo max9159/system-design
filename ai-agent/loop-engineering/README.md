@@ -1,9 +1,9 @@
 <!-- omit in toc -->
 # Loop Engineering — Bounded Loop-Back in a Gated SDLC Workflow
-
 > **A focused study of *loop engineering* in dynamic workflows: how a gated pipeline loops a failed gate back to its producer, bounded so it always terminates.**
 
-> **TL;DR.** **In:** a one-line requirement. **Out:** a commit-ready feature. Everything between is the loop detailed below.
+<!-- omit in toc -->
+## 📋 Table of Contents
 
 - [What "loop engineering" means here](#what-loop-engineering-means-here)
 - [Worked example — a gated SDLC pipeline (fan-out + adversarial + loop)](#worked-example--a-gated-sdlc-pipeline-fan-out--adversarial--loop)
@@ -17,6 +17,8 @@
   - [Sources](#sources)
 
 ---
+
+> **TL;DR.** **In:** a one-line requirement. **Out:** a commit-ready feature. Everything between is the loop detailed below.
 
 ## What "loop engineering" means here
 

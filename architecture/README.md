@@ -1,15 +1,16 @@
-# Architecture<!-- omit in toc -->
-<!-- table of content -->
-- [Abstract](#abstract)
+<!-- omit in toc -->
+# Architecture
+> This document provides a detailed overview of the system architecture, emphasizing the use of `mermaid` and `draw.io` for visual representation.
+
+<!-- omit in toc -->
+## 📋 Table of Contents
+
 - [Popular Product System Designs](#popular-product-system-designs)
 - [C4 Context Diagram of Jenkins and Git Repositories](#c4-context-diagram-of-jenkins-and-git-repositories)
 - [`Draw.io` - eCommerceWebSite System Design v1](#drawio---ecommercewebsite-system-design-v1)
   - [`draw.io` Source](#drawio-source)
   - [`draw.io` HTML Preview (Offline)](#drawio-html-preview-offline)
   - [`draw.io` Online Preview](#drawio-online-preview)
-
-## Abstract
-> This document provides a detailed overview of the system architecture, emphasizing the use of `mermaid` and `draw.io` for visual representation. 
 
 ## Popular Product System Designs
 > These Mermaid-first design packs turn high-signal survey sources into quick architecture reads with explicit evidence boundaries and best-practice takeaways.

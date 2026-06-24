@@ -1,6 +1,39 @@
+<!-- omit in toc -->
 # Claude Code Custom Status Line — Setup Guide
+> A guide to reproduce a rich, single-line status bar on any computer running Claude Code.
 
-A guide to reproduce a rich, single-line status bar on any computer running Claude Code.
+<!-- omit in toc -->
+## 📋 Table of Contents
+
+- [Quick start](#quick-start)
+- [What it does](#what-it-does)
+- [How it works](#how-it-works)
+- [Requirements](#requirements)
+- [Setup (2 files)](#setup-2-files)
+  - [1. Copy the script: `<config-dir>/statusline.cjs`](#1-copy-the-script-config-dirstatuslinecjs)
+  - [2. Add the setting: `<config-dir>/settings.json`](#2-add-the-setting-config-dirsettingsjson)
+  - [3. Restart Claude Code](#3-restart-claude-code)
+- [Verify it works (optional)](#verify-it-works-optional)
+- [Gotchas learned during setup](#gotchas-learned-during-setup)
+- [Customizing](#customizing)
+- [Full stdin JSON Reference](#full-stdin-json-reference)
+  - [Top-level](#top-level)
+  - [`model`](#model)
+  - [`workspace`](#workspace)
+  - [`context_window`](#context_window)
+  - [`cost`](#cost)
+  - [`rate_limits` *(Claude.ai Pro/Max subscribers only)*](#rate_limits-claudeai-promax-subscribers-only)
+  - [`effort` *(optional)*](#effort-optional)
+  - [`thinking` *(optional)*](#thinking-optional)
+  - [`output_style` *(optional)*](#output_style-optional)
+  - [`vim` *(optional)*](#vim-optional)
+  - [`agent` *(optional)*](#agent-optional)
+  - [`pr` *(optional)*](#pr-optional)
+  - [`worktree` *(optional)*](#worktree-optional)
+  - [Environment variables set by Claude Code](#environment-variables-set-by-claude-code)
+  - [`statusLine` config options (settings.json)](#statusline-config-options-settingsjson)
+  - [Update triggers](#update-triggers)
+- [Appendix — `statusline.cjs` source](#appendix--statuslinecjs-source)
 
 Runnable artifacts in this directory:
 
